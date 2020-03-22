@@ -3,4 +3,5 @@ $side-bar-width: 300px;
 $main-width: calc(100vw - #{$side-bar-width});
 $main-bottom-height: 250px;
 $main-top-height: calc(100vh - #{$header-height} - #{$main-bottom-height});
-$header-color: #FE9A2E;
+$header-color: gainsboro;
+$btn-color: coral;

@@ -5,9 +5,7 @@ class Nav extends React.Component {
   render() {
     console.log('Nav');
     return(
-      <div className="nav">
-        Enegy cost simulator
-      </div>
+      <div className="nav"></div>
     );
   }
 }

@@ -1,0 +1,18 @@
+@mixin button-set($line-hght, $bg-clr, $fnt-clr, $fnt-size) {
+  line-height: $line-hght;
+  background-color: $bg-clr;
+  text-align: center;
+  color: $fnt-clr;
+  font-size: $fnt-size;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+@mixin area-set($height, $width, $padding, $bg-clr) {
+  height: $height;
+  width: $width;
+  padding: $padding;
+  background-color: $bg-clr;
+}
