@@ -1,0 +1,40 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  height: $header-height;
+  width: 100vw;
+  background-color: $header-color;
+  position: fixed;
+  box-shadow: 0px 2px 5px darkgray;
+}
+
+.wrapper {
+  padding-top: $header-height;
+  display: flex;
+  .sidebar {
+    height: calc(100vh - $header-height);
+    width: $side-bar-width;
+    background-color: whitesmoke;
+  }
+  .main {
+    .main_top {
+      height: $main-top-height;
+      width: $main-width;
+      background-color: whitesmoke;
+    }
+    .main_bottom {
+      height: $main-bottom-height;
+      width: $main-width;
+      background-color: whitesmoke;
+    }
+  }
+}

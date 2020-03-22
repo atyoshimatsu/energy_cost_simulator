@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class Navi extends React.Component {
+class Nav extends React.Component {
   render() {
+    console.log('Nav');
     return(
       <div className="nav">
-        enegy cost simulator
+        Enegy cost simulator
       </div>
     );
   }
@@ -35,9 +36,10 @@ class MainBottom extends React.Component {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => ReactDOM.render(
+document.addEventListener('DOMContentLoaded', () => {
+  ReactDOM.render(
     <React.Fragment>
-      <Navi />
+      <Nav />
       <div className='wrapper'>
         <Sidebar />
         <div className='main'>
@@ -46,6 +48,6 @@ document.addEventListener('DOMContentLoaded', () => ReactDOM.render(
         </div>
       </div>
     </React.Fragment>,
-  document.getElementById('container')
+    document.getElementById('container')
   )
-)
+})

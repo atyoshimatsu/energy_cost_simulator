@@ -17,3 +17,4 @@
 
 console.log('hello, world! from webpack')
 import './container'
+import './navbar'
