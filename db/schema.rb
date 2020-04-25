@@ -10,12 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_114033) do
+ActiveRecord::Schema.define(version: 2020_04_18_061844) do
 
   create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url", null: false
+    t.string "title"
+    t.string "text"
+    t.string "image"
   end
 
   create_table "estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -41,20 +45,28 @@ ActiveRecord::Schema.define(version: 2020_03_15_114033) do
   end
 
   create_table "menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.integer "type"
-    t.integer "area"
-    t.float "EC"
-    t.float "DC_other"
+    t.string "name", null: false
+    t.integer "contract_type", null: false
+    t.integer "area", null: false
+    t.float "EC", null: false
+    t.float "DC_1"
+    t.float "DC_2"
+    t.float "DC_3"
+    t.float "DC_4"
+    t.float "DC_5"
+    t.float "DC_6"
     t.float "DC_summer"
+    t.float "DC_other"
     t.integer "threshold_1"
     t.integer "threshold_2"
     t.integer "threshold_3"
     t.integer "threshold_4"
     t.integer "threshold_5"
-    t.integer "power_factor_flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_menus_on_company_id"
   end
 
+  add_foreign_key "menus", "companies"
 end

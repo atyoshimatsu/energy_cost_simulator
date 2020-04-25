@@ -1,0 +1,49 @@
+.sidebar
+  .sidebar_title
+    .sidebar_title_main
+      現在の契約情報
+    .sidebar_title_close
+      &times;
+  = form_with do |f|
+    .sidebar_company
+      .sidebar_company-title
+        電力会社
+    .sidebar_company-search
+      = f.text_field :name, class: 'sidebar_company-search_form', placeholder: ' ex. 東京電力'
+    
+    .sidebar_area-title
+      エリア
+    .sidebar_area
+      = f.select :area, [["北海道", "1"], ["東北", "2"], ["東京", "3"], ["中部", "4"], ["北陸", "5"],["関西", "6"], ["中国", "7"], ["四国", "8"], ["九州", "9"], ["沖縄", "10"]], include_blank: "選択して下さい"
+    .sidebar_menu
+      .sidebar_menu-title
+        メニュー
+    .sidebar_menu-list
+      = f.select :menu, [], include_blank: "選択して下さい"
+    .sidebar_contract-title
+      契約容量
+    .sidebar_contract-input
+      = f.select :contract_input, [], include_blank: "選択して下さい"
+    .sidebar_usage
+      .sidebar_usage-title
+        使用量(kWh)
+    .sidebar_usage-input
+      .sidebar_usage-input_monthly
+        = f.text_field :usage_apr, class: 'sidebar_usage-input_monthly_form', id: 'apr_usage', placeholder: ' 4月の使用量'
+        = f.text_field :usage_may, class: 'sidebar_usage-input_monthly_form', id: 'may_usage', placeholder: ' 5月の使用量'
+      .sidebar_usage-input_monthly
+        = f.text_field :usage_jun, class: 'sidebar_usage-input_monthly_form', id: 'jun_usage', placeholder: ' 6月の使用量'
+        = f.text_field :usage_jul, class: 'sidebar_usage-input_monthly_form', id: 'jul_usage', placeholder: ' 7月の使用量'
+      .sidebar_usage-input_monthly
+        = f.text_field :usage_aug, class: 'sidebar_usage-input_monthly_form', id: 'aug_usage', placeholder: ' 8月の使用量'
+        = f.text_field :usage_sep, class: 'sidebar_usage-input_monthly_form', id: 'sep_usage', placeholder: ' 9月の使用量'
+      .sidebar_usage-input_monthly
+        = f.text_field :usage_oct, class: 'sidebar_usage-input_monthly_form', id: 'oct_usage', placeholder: '10月の使用量'
+        = f.text_field :usage_nov, class: 'sidebar_usage-input_monthly_form', id: 'nov_usage', placeholder: '11月の使用量'
+      .sidebar_usage-input_monthly
+        = f.text_field :usage_dec, class: 'sidebar_usage-input_monthly_form', id: 'dec_usage', placeholder: '12月の使用量'
+        = f.text_field :usage_jan, class: 'sidebar_usage-input_monthly_form', id: 'jan_usage', placeholder: ' 1月の使用量'
+      .sidebar_usage-input_monthly
+        = f.text_field :usage_feb, class: 'sidebar_usage-input_monthly_form', id: 'feb_usage', placeholder: ' 2月の使用量'
+        = f.text_field :usage_mar, class: 'sidebar_usage-input_monthly_form', id: 'mar_usage', placeholder: ' 3月の使用量'
+    

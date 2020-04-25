@@ -1,0 +1,26 @@
+#importModal {
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        background-color: whitesmoke;
+      }
+      .modal-body {
+        &_company-import {
+          &_title {
+            @include sidebar_title-set(18px)
+          }
+          @include import-set();
+        }
+        &_menu-import {
+          &_title {
+            @include sidebar_title-set(18px)
+          }
+          @include import-set();
+        }
+      }
+      .modal-footer {
+        background-color:whitesmoke;
+      }
+    }
+  }
+}

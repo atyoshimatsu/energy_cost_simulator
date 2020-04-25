@@ -1,0 +1,67 @@
+@mixin button-set($line-hght, $bg-clr, $fnt-clr, $fnt-size) {
+  line-height: $line-hght;
+  background-color: $bg-clr;
+  text-align: center;
+  color: $fnt-clr;
+  font-size: $fnt-size;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+@mixin area-set($height, $width, $padding, $bg-clr) {
+  height: $height;
+  width: $width;
+  padding: $padding;
+  background-color: $bg-clr;
+}
+
+@mixin sidebar_title-set($size) {
+  line-height: $size;
+  color:tomato;
+  font-size: $size;
+  padding-left: 5px;
+  margin-bottom: 10px;
+  border-left: solid 5px lightcoral;
+}
+
+@mixin maintop_title-set($size) {
+  line-height: $size;
+  color: tomato;
+  font-size: $size;
+  padding-left: 5px;
+  margin-bottom: 10px;
+  border-left: solid 5px lightcoral;
+}
+
+@mixin font-set($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+
+@mixin import-set() {
+  margin-bottom: 10px;
+  #file {
+    color: #444;
+    font-size: 14px;
+  }
+  &_form {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+  }
+}
+
+@mixin overlay($top, $left, $height, $width) {
+  position: fixed;
+  top: $top;
+  left: $left;
+  z-index: 3;
+  height: $height;
+  width: $width;
+  background: rgba(0, 0, 0, .7);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s linear;
+}
