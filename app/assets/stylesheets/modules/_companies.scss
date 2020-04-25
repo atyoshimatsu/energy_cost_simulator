@@ -1,0 +1,322 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  height: $header-height;
+  width: 100vw;
+  background-color: $header-color;
+  position: fixed;
+  box-shadow: 0px 1px 2px darkgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  &_title{
+    display: flex;
+    justify-content: start;
+    &_hamburger {
+      padding: 15px 0 0 15px;
+      height: $header-height;
+      width: 50px;
+      cursor: pointer;
+      &_bar {
+        height: 3px;
+        width: 20px;
+        border-radius: 2px;
+        background-color: tomato;
+        margin: 4px 0;
+      }
+    }
+    &_name {
+      margin-left: 15px;
+      line-height: $header-height;
+      text-align: center;
+      color: tomato;
+      font-size: 22px;
+    }
+  }
+  &_buttons {
+    display: flex;
+    justify-content: center;
+    margin-right: 20px;
+    &_csv-import {
+      @include button-set(30px, $btn-color, whitesmoke, 16px);
+      cursor: pointer;
+    }
+    &_user-name {
+      text-align: center;
+      line-height: 30px;
+      font-size: 20px;
+      color: coral;
+      margin: 0 10px;
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  .sidebar {
+    @include area-set(100vh, $side-bar-width, 15px, whitesmoke);
+    z-index: 5;
+    transition: all 0.2s ease-out;
+    position: fixed;
+    left: -$side-bar-width;
+    overflow: scroll;
+    &_title {
+      height: 48px;
+      width: culc(#{$side-bar-width} - 30px);
+      display: flex;
+      justify-content: space-between;
+      vertical-align: top;
+      &_main {
+        line-height: 48px;
+        font-size: 24px;
+        color: tomato;
+      }
+      &_close {
+        line-height: 28px;
+        font-size: 42px;
+        color: darkgray;
+        transition: 0.1s linear;
+        &:hover {
+          font-size: 46px;
+          color: gray;
+          cursor: pointer;
+        }
+      }
+    }
+    &_company {
+      display: flex;
+      justify-content: start;
+      vertical-align: bottom;
+      margin-top: 15px;
+      &-title {
+        @include sidebar_title-set(18px);
+      }
+      &-title_alert {
+        line-height: 18px;
+        font-size: 12px;
+        color: orangered;
+        margin-left: 15px;
+      }
+    }
+    &_company-search{
+      padding: 0 20px;
+      &_form{
+        height: 30px;
+        width: 100%;
+        font-size: 14px;
+        text-align: left;
+        border-radius: 3px;
+        border: 1px solid #ddd;
+      }
+      &_result {
+        font-size: 14px;
+        padding: 3px 0;
+        border-bottom: solid 2px #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-list{
+          padding: 3px 0 3px 3px;
+          color: #333;
+        }
+        &-button {
+          color: coral;
+          padding-right: 2px;
+          cursor: pointer;
+        }
+      }
+    }
+    &_area-title {
+      margin-top: 20px;
+      @include sidebar_title-set(18px);
+    }
+    &_area {
+      padding: 0 20px;
+      select {
+        height: 30px;
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid #ccc;
+      }
+    }
+    &_menu {
+      display: flex;
+      justify-content: start;
+      vertical-align: bottom;
+      margin-top: 20px;
+      &-title {
+        @include sidebar_title-set(18px);
+      }
+      &-title_alert {
+        line-height: 18px;
+        font-size: 12px;
+        color: orangered;
+        margin-left: 15px;
+      }
+    }
+    &_menu-list{
+      padding: 0 20px;
+      select {
+        height: 30px;
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid #ccc;
+      }
+    }
+    &_contract-title {
+      margin-top: 20px;
+      @include sidebar_title-set(18px);
+    }
+    &_contract-input{
+      padding: 0 20px;
+      select {
+        height: 30px;
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid #ccc;
+      }
+    }
+    &_usage {
+      display: flex;
+      justify-content: start;
+      vertical-align: bottom;
+      margin-top: 20px;
+      &-title {
+        @include sidebar_title-set(18px);
+      }
+      &-title_alert {
+        line-height: 18px;
+        font-size: 12px;
+        color: orangered;
+        margin-left: 10px;
+      }
+    }
+    &_usage-input{
+      padding: 0 20px;
+      &_monthly{
+        display: flex;
+        justify-content: center;
+        &_form{
+          height: 30px;
+          width: 100px;
+          font-size: 12px;
+          text-align: center;
+          border-radius: 3px;
+          border: 1px solid #ccc;
+          margin: 5px 10px;
+        }
+      }
+    }
+  }
+  .main {
+    padding-top: $header-height;
+    z-index: 1;
+    display: flex;
+    justify-content: start;
+    .main_top {
+      @include area-set($main-height, 50vw, 15px, whitesmoke);
+      overflow: scroll;
+      // border-bottom: solid 1px lightgray;
+      &_company {
+        display: flex;
+        justify-content: start;
+        vertical-align: bottom;
+        &-title {
+          @include maintop_title-set(18px);
+        }
+        &-title_alert {
+          line-height: 18px;
+          font-size: 12px;
+          color: orangered;
+          margin-left: 15px;
+        }
+      }
+      &_company-search {
+        padding: 0 0 10px 3px;
+        &_form {
+          height: 30px;
+          width: 300px;
+          font-size: 14px;
+          text-align: left;
+          border-radius: 3px;
+          border: 1px solid #ddd;
+          margin-bottom: 10px;
+        }
+      }
+      &_company-search_result {
+        .card-columns{
+          columns: 4;
+          .card {
+            margin-bottom: 15px;
+            .card-body {
+              .card-title{
+                color: tomato;
+                text-decoration: none;
+                font-size: 14px;
+                margin-bottom: 3px;
+              }
+              .card-text {
+                font-size: 12px;
+                margin-bottom: 3px;
+              }
+              .btn {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }  
+    }
+    .main_bottom {
+      @include area-set($main-height, 50vw, 15px, whitesmoke);
+      overflow: scroll;
+      &_title {
+        @include maintop_title-set(18px);
+      }
+      &_present {
+        color: coral;
+        font-size: 18px;
+        margin: 0px 0px 10px 10px;
+        &_company, &_area, &_menu, &_kW{
+          display: flex;
+          justify-content: start;
+          &_info, &_info_append {
+            color: salmon;
+            font-size: 16px;
+            margin: 5px 0;
+            padding-left: 25px;
+          }
+        }
+      }
+      &_chart{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.overlay {
+  @include overlay(0, 0, 100vh, 100vw);
+}
+
+.overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.side-open{
+  -webkit-transform: translate($side-bar-width, 0);
+     -moz-transform: translate($side-bar-width, 0);
+      -ms-transform: translate($side-bar-width, 0);
+       -o-transform: translate($side-bar-width, 0);
+          transform: translate($side-bar-width, 0);
+}

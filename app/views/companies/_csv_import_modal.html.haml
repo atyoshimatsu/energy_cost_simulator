@@ -1,0 +1,20 @@
+#importModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "importModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#importModalLabel.modal-title CSVインポート
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+      .modal-body
+        .modal-body_company-import
+          .modal-body_company-import_title 電力会社
+          = form_with url: import_companies_path, local: true, multipart: true do |f|
+            = f.file_field :company_file
+            = f.submit class: 'modal-body_company-import_form btn btn-warning', value: '電力会社をインポートする'
+        .modal-body_menu-import
+          .modal-body_menu-import_title 料金メニュー
+          = form_with url: import_menues_path, local: true, multipart: true do |f|
+            = f.file_field :menu_file
+            = f.submit class: 'modal-body_menu-import_form btn btn-warning', value: '料金メニューをインポートする'
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close

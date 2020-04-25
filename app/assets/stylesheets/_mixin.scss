@@ -16,3 +16,52 @@
   padding: $padding;
   background-color: $bg-clr;
 }
+
+@mixin sidebar_title-set($size) {
+  line-height: $size;
+  color:tomato;
+  font-size: $size;
+  padding-left: 5px;
+  margin-bottom: 10px;
+  border-left: solid 5px lightcoral;
+}
+
+@mixin maintop_title-set($size) {
+  line-height: $size;
+  color: tomato;
+  font-size: $size;
+  padding-left: 5px;
+  margin-bottom: 10px;
+  border-left: solid 5px lightcoral;
+}
+
+@mixin font-set($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+
+@mixin import-set() {
+  margin-bottom: 10px;
+  #file {
+    color: #444;
+    font-size: 14px;
+  }
+  &_form {
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+  }
+}
+
+@mixin overlay($top, $left, $height, $width) {
+  position: fixed;
+  top: $top;
+  left: $left;
+  z-index: 3;
+  height: $height;
+  width: $width;
+  background: rgba(0, 0, 0, .7);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s linear;
+}
