@@ -1,2 +1,0 @@
-class EstimatesController < ApplicationController
-end

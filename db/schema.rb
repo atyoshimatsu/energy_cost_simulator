@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_061844) do
+ActiveRecord::Schema.define(version: 2020_08_10_064122) do
 
   create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -22,26 +22,14 @@ ActiveRecord::Schema.define(version: 2020_04_18_061844) do
     t.string "image"
   end
 
-  create_table "estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "ampere"
-    t.integer "kVA"
-    t.integer "kW"
-    t.integer "power_factor"
-    t.integer "year"
-    t.integer "usage_jan"
-    t.integer "usage_feb"
-    t.integer "usage_mar"
-    t.integer "usage_apr"
-    t.integer "usage_may"
-    t.integer "usage_jun"
-    t.integer "usage_jul"
-    t.integer "usage_aug"
-    t.integer "usage_sep"
-    t.integer "usage_oct"
-    t.integer "usage_nov"
-    t.integer "usage_dec"
+  create_table "dcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.float "DC"
+    t.boolean "summer", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "threshold"
+    t.bigint "menu_id"
+    t.index ["menu_id"], name: "index_dcs_on_menu_id"
   end
 
   create_table "menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -49,24 +37,26 @@ ActiveRecord::Schema.define(version: 2020_04_18_061844) do
     t.integer "contract_type", null: false
     t.integer "area", null: false
     t.float "EC", null: false
-    t.float "DC_1"
-    t.float "DC_2"
-    t.float "DC_3"
-    t.float "DC_4"
-    t.float "DC_5"
-    t.float "DC_6"
-    t.float "DC_summer"
-    t.float "DC_other"
-    t.integer "threshold_1"
-    t.integer "threshold_2"
-    t.integer "threshold_3"
-    t.integer "threshold_4"
-    t.integer "threshold_5"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "company_id"
     t.index ["company_id"], name: "index_menus_on_company_id"
   end
 
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nickname", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.boolean "administrator", default: false, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "dcs", "menus"
   add_foreign_key "menus", "companies"
 end

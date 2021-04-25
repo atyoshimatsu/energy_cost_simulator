@@ -12,65 +12,378 @@ body {
   width: 100vw;
   background-color: $header-color;
   position: fixed;
-  box-shadow: 0px 1px 2px darkgray;
+  box-shadow: 0px 1px 2px white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 2;
-  &_title{
+  &_title {
     display: flex;
-    justify-content: start;
-    &_hamburger {
-      padding: 15px 0 0 15px;
-      height: $header-height;
-      width: 50px;
-      cursor: pointer;
-      &_bar {
-        height: 3px;
-        width: 20px;
-        border-radius: 2px;
-        background-color: tomato;
-        margin: 4px 0;
-      }
-    }
-    &_name {
+    margin-left: 15px;
+    align-items: center;
+    &_service{
       margin-left: 15px;
       line-height: $header-height;
       text-align: center;
       color: tomato;
       font-size: 22px;
+      text-decoration: none;
+      &:hover {
+        color: tomato;
+        text-decoration: none;
+      }
     }
   }
   &_buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-right: 20px;
     &_csv-import {
-      @include button-set(30px, $btn-color, whitesmoke, 16px);
-      cursor: pointer;
+      @include button-set(30px, $btn-color, white, 16px);
+    }
+    &_howtouse {
+      @include button-set(30px, $btn-color, white, 16px);
     }
     &_user-name {
+      margin: auto 15px;
       text-align: center;
-      line-height: 30px;
-      font-size: 20px;
-      color: coral;
-      margin: 0 10px;
+      color: tomato;
+      font-size: 18px;
+    }
+    &_logout {
+      margin-left: 10px;
+      text-align: center;
+      color: tomato;
+      font-size: 18px;
+      text-decoration: none;
+      &:hover {
+        color: tomato;
+        text-decoration: none;
+      }
     }
   }
 }
 
 .wrapper {
   display: flex;
+  .main {
+    padding-top: $header-height;
+    z-index: 1;
+    .main_info{
+      @include area-set(calc(100vh - #{$header-height}), 100vw, 15px, calc(100vw/5), 0, calc(100vw/5), white);
+      overflow: scroll;
+      &_title {
+        height: 36px;
+        display: flex;
+        justify-content: space-between;
+        &_main {
+          line-height: 36px;
+          font-size: 24px;
+          color: tomato;
+        }
+        &_process {
+          display: flex;
+          justify-content: end;
+          &_this {
+            @include process_num_this();
+          }
+          &_num {
+            @include process_num();
+          }
+        }
+      }
+      &_company {
+        display: flex;
+        justify-content: start;
+        vertical-align: bottom;
+        margin-top: 15px;
+        &-title {
+          @include title-set(18px);
+        }
+        &-title_alert {
+          @include title-alert(18px);
+        }
+      }
+      &_company-search{
+        padding: 0 20px;
+        &_form{
+          height: 30px;
+          width: 100%;
+          font-size: 14px;
+          text-align: left;
+          border-radius: 3px;
+          border: 1px solid #ddd;
+        }
+        &_result {
+          font-size: 14px;
+          margin: 0px 20px;
+          padding: 3px 0;
+          border-bottom: solid 2px #ddd;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          &-list{
+            padding: 3px 20px 3px 3px;
+            color: #333;
+          }
+          &-button {
+            color: coral;
+            padding-right: 2px;
+            cursor: pointer;
+          }
+        }
+      }
+      &_area-title {
+        @include title-set(18px);
+      }
+      &_area {
+        padding: 0 20px;
+        select {
+          height: 30px;
+          width: 100%;
+          font-size: 14px;
+          border: 1px solid #ccc;
+        }
+      }
+      &_menu {
+        display: flex;
+        justify-content: start;
+        vertical-align: bottom;
+        &-title {
+          @include title-set(18px);
+        }
+        &-title_alert {
+          @include title-alert(18px);
+        }
+      }
+      &_menu-list{
+        padding: 0 20px;
+        select {
+          height: 30px;
+          width: 100%;
+          font-size: 14px;
+          border: 1px solid #ccc;
+        }
+      }
+      &_contract-title {
+        @include title-set(18px);
+      }
+      &_contract-input{
+        padding: 0 20px;
+        select {
+          height: 30px;
+          width: 100%;
+          font-size: 14px;
+          border: 1px solid #ccc;
+        }
+      }
+      &_usage {
+        display: flex;
+        justify-content: start;
+        vertical-align: bottom;
+        &-title {
+          @include title-set(18px);
+        }
+        &-title_alert {
+          @include title-alert(18px);
+        }
+      }
+      &_usage-input{
+        padding: 0 20px 40px;
+        &_monthly{
+          display: flex;
+          justify-content: center;
+          &_form{
+            height: 30px;
+            width: 100px;
+            font-size: 12px;
+            text-align: center;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            margin: 5px 10px;
+          }
+        }
+      }
+      &_process_btn_to_top {
+        text-align: center;
+        width: 50%;
+        @include button-set(30px, $btn-color, white, 16px);
+        margin: auto;
+      }
+    }
+    .main_top {
+      @include area-set(100vh, 100vw, 15px, calc(100vw/5), 0, calc(100vw/5), white);
+      padding-bottom: 40px;
+      overflow: scroll;
+      &_title {
+        height: 36px;
+        display: flex;
+        justify-content: space-between;
+        &-title_alert {
+          @include title-alert(18px);
+        }
+        &_main {
+          line-height: 36px;
+          font-size: 24px;
+          color: tomato;
+        }
+        &_process {
+          display: flex;
+          justify-content: end;
+          &_this {
+            @include process_num_this();
+          }
+          &_num {
+            @include process_num();
+          }
+        }
+      }
+      &_company {
+        display: flex;
+        justify-content: start;
+        vertical-align: bottom;
+        margin-top: 15px;
+        &-title {
+          @include title-set(18px);
+        }
+        &-title_alert {
+          @include title-alert(18px);
+        }
+      }
+      &_company-search {
+        padding: 0 20px;
+        &_form {
+          height: 30px;
+          width: 100%;
+          font-size: 14px;
+          text-align: left;
+          border-radius: 3px;
+          border: 1px solid #ddd;
+        }
+      }
+      &_company-search_result {
+        margin-top: 20px;
+        .card-columns{
+          columns: 4;
+          .card {
+            .card-body {
+              .card-title{
+                color: tomato;
+                text-decoration: none;
+                font-size: 14px;
+                margin-bottom: 3px;
+              }
+              .card-text {
+                font-size: 12px;
+                margin-bottom: 3px;
+              }
+              .card-btn{
+                margin: 10px 0;
+                text-align: center;
+                .main_top_process_btn_to_bottom {
+                  text-decoration: none;
+                  @include font-set(12px, white);
+                }
+              }
+            }
+          }
+        }
+      }  
+    }
+    .main_bottom {
+      @include area-set(100vh, 100vw, 15px, calc(100vw/5), 0, calc(100vw/5), white);
+      overflow: scroll;
+      &_title {
+        height: 36px;
+        display: flex;
+        justify-content: space-between;
+        &_main {
+          line-height: 36px;
+          font-size: 24px;
+          color: tomato;
+        }
+        &_process {
+          display: flex;
+          justify-content: end;
+          &_this {
+            @include process_num_this();
+          }
+          &_num {
+            @include process_num();
+          }
+        }
+      }
+      &_company {
+        @include title-set(18px);
+      }
+      &_company_name {
+        padding-left: 20px;
+        @include font-set(18px, salmon);
+      }
+      &_menu {
+        display: flex;
+        justify-content: start;
+        vertical-align: bottom;
+        &_title{ 
+          @include title-set(18px);
+        }
+        &_title_alert {
+          @include title-alert(18px);
+        }
+        &_name {
+          padding-left: 20px;
+          @include font-set(18px, salmon);  
+        }
+      }
+      &_menu-list{
+        padding: 0 20px;
+        select {
+          height: 30px;
+          width: 100%;
+          font-size: 14px;
+          border: 1px solid #ccc;
+        }
+      }
+      select {
+        margin: 10px 20px;
+        height: 30px;
+        width: calc(100% - 40px);
+        font-size: 14px;
+        border: 1px solid #ccc;
+      }
+      &_btn_calc {
+        text-align: center;
+        width: 50%;
+        @include button-set(30px, $btn-color, white, 16px);
+        margin: 20px auto 30px;
+      }
+      &_result {
+        line-height: 75px;
+        border-radius: 10px;
+        background-color: bisque;
+        font-size: 24px;
+        text-align: center;
+        margin: auto;
+      }
+      &_chart{
+        margin-top: 10px;
+        width: 100%;
+        height: calc((100vh - $header-height)/3);
+      }
+    }
+  }
+
+
   .sidebar {
-    @include area-set(100vh, $side-bar-width, 15px, whitesmoke);
+    @include area-set(100vh, $side-bar-width, 15px, 15px, 15px, 15px, white);
     z-index: 5;
     transition: all 0.2s ease-out;
     position: fixed;
-    left: -$side-bar-width;
+    right: -$side-bar-width;
     overflow: scroll;
     &_title {
       height: 48px;
-      width: culc(#{$side-bar-width} - 30px);
+      width: calc(#{$side-bar-width} - 30px);
       display: flex;
       justify-content: space-between;
       vertical-align: top;
@@ -83,222 +396,22 @@ body {
         line-height: 28px;
         font-size: 42px;
         color: darkgray;
+        cursor: pointer;
         transition: 0.1s linear;
         &:hover {
           font-size: 46px;
           color: gray;
-          cursor: pointer;
         }
       }
     }
-    &_company {
-      display: flex;
-      justify-content: start;
-      vertical-align: bottom;
-      margin-top: 15px;
-      &-title {
-        @include sidebar_title-set(18px);
+    &_main {
+      &_num {
+        @include process_num_this;
       }
-      &-title_alert {
-        line-height: 18px;
-        font-size: 12px;
-        color: orangered;
-        margin-left: 15px;
-      }
-    }
-    &_company-search{
-      padding: 0 20px;
-      &_form{
-        height: 30px;
-        width: 100%;
-        font-size: 14px;
-        text-align: left;
-        border-radius: 3px;
-        border: 1px solid #ddd;
-      }
-      &_result {
-        font-size: 14px;
-        padding: 3px 0;
-        border-bottom: solid 2px #ddd;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        &-list{
-          padding: 3px 0 3px 3px;
-          color: #333;
-        }
-        &-button {
-          color: coral;
-          padding-right: 2px;
-          cursor: pointer;
-        }
-      }
-    }
-    &_area-title {
-      margin-top: 20px;
-      @include sidebar_title-set(18px);
-    }
-    &_area {
-      padding: 0 20px;
-      select {
-        height: 30px;
-        width: 100%;
-        font-size: 14px;
-        border: 1px solid #ccc;
-      }
-    }
-    &_menu {
-      display: flex;
-      justify-content: start;
-      vertical-align: bottom;
-      margin-top: 20px;
-      &-title {
-        @include sidebar_title-set(18px);
-      }
-      &-title_alert {
-        line-height: 18px;
-        font-size: 12px;
-        color: orangered;
-        margin-left: 15px;
-      }
-    }
-    &_menu-list{
-      padding: 0 20px;
-      select {
-        height: 30px;
-        width: 100%;
-        font-size: 14px;
-        border: 1px solid #ccc;
-      }
-    }
-    &_contract-title {
-      margin-top: 20px;
-      @include sidebar_title-set(18px);
-    }
-    &_contract-input{
-      padding: 0 20px;
-      select {
-        height: 30px;
-        width: 100%;
-        font-size: 14px;
-        border: 1px solid #ccc;
-      }
-    }
-    &_usage {
-      display: flex;
-      justify-content: start;
-      vertical-align: bottom;
-      margin-top: 20px;
-      &-title {
-        @include sidebar_title-set(18px);
-      }
-      &-title_alert {
-        line-height: 18px;
-        font-size: 12px;
-        color: orangered;
-        margin-left: 10px;
-      }
-    }
-    &_usage-input{
-      padding: 0 20px;
-      &_monthly{
-        display: flex;
-        justify-content: center;
-        &_form{
-          height: 30px;
-          width: 100px;
-          font-size: 12px;
-          text-align: center;
-          border-radius: 3px;
-          border: 1px solid #ccc;
-          margin: 5px 10px;
-        }
-      }
-    }
-  }
-  .main {
-    padding-top: $header-height;
-    z-index: 1;
-    display: flex;
-    justify-content: start;
-    .main_top {
-      @include area-set($main-height, 50vw, 15px, whitesmoke);
-      overflow: scroll;
-      // border-bottom: solid 1px lightgray;
-      &_company {
-        display: flex;
-        justify-content: start;
-        vertical-align: bottom;
-        &-title {
-          @include maintop_title-set(18px);
-        }
-        &-title_alert {
-          line-height: 18px;
-          font-size: 12px;
-          color: orangered;
-          margin-left: 15px;
-        }
-      }
-      &_company-search {
-        padding: 0 0 10px 3px;
-        &_form {
-          height: 30px;
-          width: 300px;
-          font-size: 14px;
-          text-align: left;
-          border-radius: 3px;
-          border: 1px solid #ddd;
-          margin-bottom: 10px;
-        }
-      }
-      &_company-search_result {
-        .card-columns{
-          columns: 4;
-          .card {
-            margin-bottom: 15px;
-            .card-body {
-              .card-title{
-                color: tomato;
-                text-decoration: none;
-                font-size: 14px;
-                margin-bottom: 3px;
-              }
-              .card-text {
-                font-size: 12px;
-                margin-bottom: 3px;
-              }
-              .btn {
-                font-size: 12px;
-              }
-            }
-          }
-        }
-      }  
-    }
-    .main_bottom {
-      @include area-set($main-height, 50vw, 15px, whitesmoke);
-      overflow: scroll;
-      &_title {
-        @include maintop_title-set(18px);
-      }
-      &_present {
-        color: coral;
-        font-size: 18px;
-        margin: 0px 0px 10px 10px;
-        &_company, &_area, &_menu, &_kW{
-          display: flex;
-          justify-content: start;
-          &_info, &_info_append {
-            color: salmon;
-            font-size: 16px;
-            margin: 5px 0;
-            padding-left: 25px;
-          }
-        }
-      }
-      &_chart{
-        width: 100%;
-        height: 100%;
+      &_contents {
+        margin: 20px auto;
+        padding-left: 20px;
+        @include font-set(16px, salmon);
       }
     }
   }
@@ -314,9 +427,9 @@ body {
 }
 
 .side-open{
-  -webkit-transform: translate($side-bar-width, 0);
-     -moz-transform: translate($side-bar-width, 0);
-      -ms-transform: translate($side-bar-width, 0);
-       -o-transform: translate($side-bar-width, 0);
-          transform: translate($side-bar-width, 0);
+  -webkit-transform: translate(-$side-bar-width, 0);
+     -moz-transform: translate(-$side-bar-width, 0);
+      -ms-transform: translate(-$side-bar-width, 0);
+       -o-transform: translate(-$side-bar-width, 0);
+          transform: translate(-$side-bar-width, 0);
 }

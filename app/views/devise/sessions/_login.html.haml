@@ -1,0 +1,17 @@
+.login-left_form
+  = image_tag "energy_cost_simulator.png", width: "300px" 
+  .login-left_form_top-title
+    ログイン
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login_form"}) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .login_form_field
+      = f.label :Eメール, class: "login_form_field_label"
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "login_form_field_input"
+    .login_form_field
+      = f.label :パスワード, class: "login_form_field_label"
+      %br/
+      = f.password_field :password, autocomplete: "current-password", class: "login_form_field_input"
+    .login_form_actions
+      = f.submit "ログイン", class: "login_form_actions_button"
+  = render "devise/shared/links"

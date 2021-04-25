@@ -5,15 +5,9 @@
         background-color: whitesmoke;
       }
       .modal-body {
-        &_company-import {
+        &_import {
           &_title {
-            @include sidebar_title-set(18px)
-          }
-          @include import-set();
-        }
-        &_menu-import {
-          &_title {
-            @include sidebar_title-set(18px)
+            @include title-set(18px)
           }
           @include import-set();
         }

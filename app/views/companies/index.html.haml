@@ -1,9 +1,3 @@
 = render 'csv_import_modal'
 .overlay
-.view
-  = render 'nav'
-  .wrapper
-    = render 'sidebar'
-    .main
-      = render 'main_top'
-      = render 'main_bottom'
+= react_component("View", {user: @user, companies: @companies})

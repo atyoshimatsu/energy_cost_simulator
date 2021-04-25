@@ -77,3 +77,11 @@ gem 'mechanize'
 gem 'activesupport'
 # chart-js
 gem 'chart-js-rails'
+# devise
+gem 'devise'
+# 日本語化
+gem 'rails-i18n'
+# webpacker
+gem 'webpacker'
+# react
+gem 'react-rails'

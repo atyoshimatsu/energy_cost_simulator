@@ -81,7 +81,10 @@ module.exports = function(api) {
         {
           removeImport: true
         }
-      ]
+      ],
+      [
+        "styled-jsx/babel"
+      ],
     ].filter(Boolean)
   }
 }

@@ -1,0 +1,18 @@
+.signup-left_form
+  = image_tag "energy_cost_simulator.png", width: "300px" 
+  .signup-left_form_top-title
+    新規ユーザ登録
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "signup_form"}) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .signup_form_field
+      = f.label :email, class: "signup_form_field_label", value: "Eメールアドレス"
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "signup_form_field_input"
+    .signup_form_field
+      = f.label :password, class: "signup_form_field_label", value: "パスワード"
+      = f.password_field :password, autocomplete: "new-password", placeholder: "#{@minimum_password_length}文字以上で設定してください", class: "signup_form_field_input"
+    .signup_form_field
+      = f.label :password_confirmation, class: "signup_form_field_label", value: "パスワードの再確認"
+      = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "再度パスワードを入力してください", class: "signup_form_field_input"
+    .signup_actions
+      = f.submit "ユーザ登録を行う", class: "signup_form_actions_button"
+  = render "devise/shared/links"

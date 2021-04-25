@@ -1,38 +1,39 @@
-@mixin button-set($line-hght, $bg-clr, $fnt-clr, $fnt-size) {
-  line-height: $line-hght;
+@mixin button-set($line-height, $bg-clr, $fnt-clr, $fnt-size) {
+  line-height: $line-height;
   background-color: $bg-clr;
   text-align: center;
   color: $fnt-clr;
   font-size: $fnt-size;
   padding: 0 10px;
   border-radius: 5px;
-  margin: 0 10px;
+  margin: 0 15px;
   text-decoration: none;
+  cursor: pointer;
 }
 
-@mixin area-set($height, $width, $padding, $bg-clr) {
+@mixin area-set($height, $width, $padding-top, $padding-right, $padding-bottom, $padding-left, $bg-clr) {
   height: $height;
   width: $width;
-  padding: $padding;
+  padding: $padding-top $padding-right $padding-bottom $padding-left;
   background-color: $bg-clr;
 }
 
-@mixin sidebar_title-set($size) {
+@mixin title-set($size) {
   line-height: $size;
   color:tomato;
   font-size: $size;
   padding-left: 5px;
+  margin-top: 20px;
   margin-bottom: 10px;
   border-left: solid 5px lightcoral;
 }
 
-@mixin maintop_title-set($size) {
+@mixin title-alert($size) {
   line-height: $size;
-  color: tomato;
+  color:orangered;
   font-size: $size;
   padding-left: 5px;
-  margin-bottom: 10px;
-  border-left: solid 5px lightcoral;
+  margin: 20px 0 10px 20px;
 }
 
 @mixin font-set($size, $color) {
@@ -63,5 +64,35 @@
   background: rgba(0, 0, 0, .7);
   opacity: 0;
   visibility: hidden;
-  transition: .3s linear;
+  transition: .3s ease-in-out;
+}
+
+@mixin process_num_this () {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  font-size: 32px;
+  background-color: coral;
+  color: white;
+  text-align: center;
+  line-height: 36px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+@mixin process_num () {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  font-size: 28px;
+  background-color: darkgray;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  margin: 3px 0 0 10px;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  &:hover {
+    background-color: dimgray;
+  }
 }

@@ -1,0 +1,74 @@
+.login, .signup, .password-reset{ 
+  @include area-set(100vh, 100vw, 0, 0, 0, 0, white);
+  display: flex;
+  &-left{
+    @include area-set(100vh, 45vw, 0, 0, 0, 0, white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_form{
+      text-align: center;
+      &_top-title {
+        @include font-set(18px, #555555);
+        margin: 40px 0;
+      }
+      .signup, .login, .reset {
+        &_form{
+          width: 300px;
+          &_field {
+            width: 100%;
+            &_label{
+              width: 100%;
+              margin: 0;
+              text-align: start;
+              @include font-set(16px, #555555)
+            }
+            &_input{
+              width: 100%;
+              margin-bottom: 15px;
+            }
+          }
+          &_actions {
+            width: 100%;
+            &_button {
+              width: 100%;
+              height: 40px;
+              background-color: tomato;
+              @include font-set(18px,white);
+              border: none;
+              text-decoration: none;
+              margin: 20px auto;
+              cursor: hover;
+            }
+          }
+        }
+      }
+      a {
+        text-decoration: none;
+        @include font-set(18px, tomato);
+        &:hover {
+          color: tomato;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  &-right{
+    @include area-set(100vh, 55vw, 0, 0, 0, 0, white);
+    border-left: 1px solid #aaaaaa;
+    background-image: url("bulbs-min.png");
+    background-size: cover; 
+  }
+}
+
+#error_explanation {
+  margin-bottom: 30px;
+  ul {
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    text-align: start;
+    list-style: none;
+    @include font-set(16px, orangered)
+  }
+}
