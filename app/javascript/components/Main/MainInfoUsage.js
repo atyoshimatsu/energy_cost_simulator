@@ -1,0 +1,102 @@
+import React, { useContext, useState } from "react"
+import { UsagesContext, CompanyContext, MenuContext, KWContext } from '../View'
+import { AreaCodeContext } from './MainInfo'
+
+const MainInfoUsage = () => {
+  const [usages, setUsages] = useContext(UsagesContext);
+  const [company, setCompany] = useContext(CompanyContext);
+  const [menu, setMenu] = useContext(MenuContext);
+  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
+  const [kW, setKW] = useContext(KWContext);
+
+  const [styles, setStyles] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
+  const [alertFlag, setAlertFlag] = useState(0);
+
+  const handleChange=(e, key)=>{
+    const usages_copy = usages;
+    const styles_copy = styles;
+
+    usages_copy[key] = e.target.value;
+    // this.setState({usages: usages_copy});
+    // this.props.updateUsage({usages: this.state.usages});
+    setUsages(usages);
+
+    if (!/^[0-9]*$/.test(usages[key]) && usages[key] != null && usages[key] != "") {
+      styles_copy[key] = {background: "lightcoral"};
+      setStyles(styles_copy);
+    } else {
+      styles_copy[key] = {};
+      setStyles(styles_copy);
+    }
+
+    setAlertFlag(0);
+
+    for (let i = 0; i < 12; i++) {
+      if (!/^[0-9]*$/.test(usages[i]) && usages[i] != null && usages[i] != "") {
+        setAlertFlag(alertFlag + 1);
+        break;
+      }
+    }
+  }
+
+  const onClickToTop=()=>{
+    $('html, body').animate({scrollTop:$('#main_top').offset().top - 50}, 400 , 'swing');
+  }
+
+  let alertMessage = "";
+  if (alertFlag != 0) {
+    alertMessage = (<div className="main_info_usage-title_alert">半角整数で入力して下さい</div>)
+  }
+
+  let nullCheck = true;
+  let button = "";
+  usages.forEach(usage => {
+  if (usage != null && usage != ""){
+      nullCheck = false;
+    }
+  });
+
+  if ((["6", "7", "8"].indexOf(areaCode) === -1 && company !== "" && menu !=="" && kW !== "" && areaCode !== "" && alertFlag === 0 && nullCheck === false)
+  || (["6", "7", "8"].indexOf(areaCode) !== -1 && company !== "" && menu !== "" && areaCode !== "" && alertFlag === 0 && nullCheck === false)) {
+    button = (
+      <div className="main_info_process_btn_to_top" onClick={onClickToTop} style={{background: "tomato"}}>次へ</div>
+    );
+  } else {
+    button = (
+      <div className="main_info_process_btn_to_top" style={{background: "darkgray", cursor: "default"}}>次へ</div>
+    );
+  }
+
+  return (
+    <>
+      <div className="main_info_usage">
+        <div className="main_info_usage-title">
+          使用量(kWh)
+        </div>
+        {alertMessage}
+      </div>
+      <div className="main_info_usage-input">
+        <div className="main_info_usage-input_monthly">
+          <input className="main_info_usage-input_monthly_form" key="0" placeholder=" 4月の使用量" type="text" onChange={e => handleChange(e, 0)} style={styles[0]}/>
+          <input className="main_info_usage-input_monthly_form" key="1" placeholder=" 5月の使用量" type="text" onChange={e => handleChange(e, 1)} style={styles[1]}/>
+          <input className="main_info_usage-input_monthly_form" key="2" placeholder=" 6月の使用量" type="text" onChange={e => handleChange(e, 2)} style={styles[2]}/>
+          <input className="main_info_usage-input_monthly_form" key="3" placeholder=" 7月の使用量" type="text" onChange={e => handleChange(e, 3)} style={styles[3]}/>
+          <input className="main_info_usage-input_monthly_form" key="4" placeholder=" 8月の使用量" type="text" onChange={e => handleChange(e, 4)} style={styles[4]}/>
+          <input className="main_info_usage-input_monthly_form" key="5" placeholder=" 9月の使用量" type="text" onChange={e => handleChange(e, 5)} style={styles[5]}/>
+        </div>
+        <div className="main_info_usage-input_monthly">
+          <input className="main_info_usage-input_monthly_form" key="6" placeholder="10月の使用量" type="text" onChange={e => handleChange(e, 6)} style={styles[6]}/>
+          <input className="main_info_usage-input_monthly_form" key="7" placeholder="11月の使用量" type="text" onChange={e => handleChange(e, 7)} style={styles[7]}/>
+          <input className="main_info_usage-input_monthly_form" key="8" placeholder="12月の使用量" type="text" onChange={e => handleChange(e, 8)} style={styles[8]}/>
+          <input className="main_info_usage-input_monthly_form" key="9" placeholder=" 1月の使用量" type="text" onChange={e => handleChange(e, 9)} style={styles[9]}/>
+          <input className="main_info_usage-input_monthly_form" key="10" placeholder=" 2月の使用量" type="text" onChange={e => handleChange(e, 10)} style={styles[10]}/>
+          <input className="main_info_usage-input_monthly_form" key="11" placeholder=" 3月の使用量" type="text" onChange={e => handleChange(e, 11)} style={styles[11]}/>
+        </div>
+      </div>
+      {button}
+    </>
+  );
+
+}
+
+export default MainInfoUsage
