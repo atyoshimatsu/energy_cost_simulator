@@ -1,5 +1,4 @@
-import React, {useState, useContext} from "react"
-// import { Provider } from './context/context'
+import React, { useState } from "react"
 import Nav from "./Nav/Nav"
 import MainInfo from "./Main/MainInfo"
 import MainTop from "./Main/MainTop"
@@ -10,14 +9,21 @@ export const CompanyContext = React.createContext()
 export const MenuContext = React.createContext()
 export const KWContext = React.createContext()
 export const UsagesContext = React.createContext()
+export const NextMenuesContext = React.createContext()
+export const MenuesContext = React.createContext()
+export const AreaCodeContext = React.createContext()
+
 
 const View = props => {
 	const [company, setCompany] = useState({});
 	const [menu, setMenu] = useState({});
 	const [kW, setKW] = useState('');
 	const [usages, setUsages] = useState([null, null, null, null, null, null, null, null, null, null, null, null]);
+	const [nextMenues, setNextMenues] = useState({});
+	const [menues, setMenues] = useState([]);
+	const [areaCode, setAreaCode] = useState('');
 
-  return (
+	return (
 			<div className="view">
 				<Nav user={props.user} />
 				<div className="wrapper">
@@ -26,9 +32,15 @@ const View = props => {
 					<MenuContext.Provider value={[menu, setMenu]}>
 					<KWContext.Provider value={[kW, setKW]}>
 					<UsagesContext.Provider value={[usages, setUsages]}>
+					<MenuesContext.Provider value={[menues, setMenues]}>
+					<AreaCodeContext.Provider value={[areaCode, setAreaCode]}>
 					<MainInfo />
-					{/* <MainTop companies={props.companies} />
-					<MainBottom /> */}
+					<NextMenuesContext.Provider value={[nextMenues, setNextMenues]}>
+					<MainTop companies={props.companies} />
+					{/* <MainBottom /> */}
+					</NextMenuesContext.Provider>
+					</AreaCodeContext.Provider>
+					</MenuesContext.Provider>
 					</UsagesContext.Provider>
 					</KWContext.Provider>
 					</MenuContext.Provider>

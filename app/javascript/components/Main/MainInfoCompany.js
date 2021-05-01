@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react"
-import { AreaCodeContext, MenuesContext } from './MainInfo'
-import { CompanyContext } from '../View'
+import { CompanyContext, AreaCodeContext, MenuesContext } from '../View'
 
 const MainInfoCompany = () => {
   const [company, setCompany] = useContext(CompanyContext);

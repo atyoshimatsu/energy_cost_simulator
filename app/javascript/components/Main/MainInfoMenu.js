@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
-import { MenuesContext } from './MainInfo'
-import { MenuContext } from '../View'
+import { MenuContext, MenuesContext } from '../View'
 
 const MainInfoMenu = () => {
 const [menues, setMenues] =useContext(MenuesContext);

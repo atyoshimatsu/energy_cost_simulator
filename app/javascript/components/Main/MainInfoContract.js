@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
-import { MenuContext, KWContext } from '../View'
-import { AreaCodeContext } from "./MainInfo";
+import { MenuContext, KWContext, AreaCodeContext} from '../View'
 
 const MainInfoContract = () => {
   const [kw, setKW] = useContext(KWContext);

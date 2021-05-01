@@ -1,38 +1,35 @@
 import React, { useContext, useState } from "react"
-import { UsagesContext, CompanyContext, MenuContext, KWContext } from '../View'
-import { AreaCodeContext } from './MainInfo'
+import { CompanyContext, MenuContext, KWContext, UsagesContext, AreaCodeContext } from '../View'
 
 const MainInfoUsage = () => {
-  const [usages, setUsages] = useContext(UsagesContext);
   const [company, setCompany] = useContext(CompanyContext);
   const [menu, setMenu] = useContext(MenuContext);
   const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [kW, setKW] = useContext(KWContext);
+  const [usages, setUsages] = useContext(UsagesContext);
 
+	const [stateUsages, setStateUsages] = useState(usages);
   const [styles, setStyles] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
-  const [alertFlag, setAlertFlag] = useState(0);
+  const [alertFlag, setAlertFlag] = useState('');
 
   const handleChange=(e, key)=>{
-    const usages_copy = usages;
-    const styles_copy = styles;
+    let usages_copy = stateUsages.slice();
+    let styles_copy = styles.slice();
 
     usages_copy[key] = e.target.value;
-    // this.setState({usages: usages_copy});
-    // this.props.updateUsage({usages: this.state.usages});
-    setUsages(usages);
+    setStateUsages(usages_copy);
+    setUsages(usages_copy);
 
-    if (!/^[0-9]*$/.test(usages[key]) && usages[key] != null && usages[key] != "") {
+    if (!/^[0-9]*$/.test(usages_copy[key]) && usages_copy[key] != null && usages_copy[key] != "") {
       styles_copy[key] = {background: "lightcoral"};
-      setStyles(styles_copy);
     } else {
       styles_copy[key] = {};
-      setStyles(styles_copy);
     }
+    setStyles(styles_copy);
 
     setAlertFlag(0);
-
     for (let i = 0; i < 12; i++) {
-      if (!/^[0-9]*$/.test(usages[i]) && usages[i] != null && usages[i] != "") {
+      if (!/^[0-9]*$/.test(usages_copy[i]) && usages_copy[i] != null && usages_copy[i] != "") {
         setAlertFlag(alertFlag + 1);
         break;
       }
@@ -49,15 +46,15 @@ const MainInfoUsage = () => {
   }
 
   let nullCheck = true;
-  let button = "";
-  usages.forEach(usage => {
+  let button = '';
+  stateUsages.forEach(usage => {
   if (usage != null && usage != ""){
       nullCheck = false;
     }
   });
 
-  if ((["6", "7", "8"].indexOf(areaCode) === -1 && company !== "" && menu !=="" && kW !== "" && areaCode !== "" && alertFlag === 0 && nullCheck === false)
-  || (["6", "7", "8"].indexOf(areaCode) !== -1 && company !== "" && menu !== "" && areaCode !== "" && alertFlag === 0 && nullCheck === false)) {
+  if ((["6", "7", "8"].indexOf(areaCode) === -1 && company !== {} && menu !== {} && kW !== '' && areaCode !== '' && alertFlag === 0 && nullCheck === false)
+  || (["6", "7", "8"].indexOf(areaCode) !== -1 && company !== {} && menu !== {} && areaCode !== '' && alertFlag === 0 && nullCheck === false)) {
     button = (
       <div className="main_info_process_btn_to_top" onClick={onClickToTop} style={{background: "tomato"}}>次へ</div>
     );
@@ -70,9 +67,7 @@ const MainInfoUsage = () => {
   return (
     <>
       <div className="main_info_usage">
-        <div className="main_info_usage-title">
-          使用量(kWh)
-        </div>
+        <div className="main_info_usage-title">使用量(kWh)</div>
         {alertMessage}
       </div>
       <div className="main_info_usage-input">
