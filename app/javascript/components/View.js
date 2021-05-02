@@ -9,9 +9,11 @@ export const CompanyContext = React.createContext()
 export const MenuContext = React.createContext()
 export const KWContext = React.createContext()
 export const UsagesContext = React.createContext()
-export const NextMenuesContext = React.createContext()
 export const MenuesContext = React.createContext()
 export const AreaCodeContext = React.createContext()
+export const NextCompanyContext = React.createContext()
+export const NextMenuesContext = React.createContext()
+export const NextMenuContext = React.createContext()
 
 
 const View = props => {
@@ -19,9 +21,11 @@ const View = props => {
 	const [menu, setMenu] = useState({});
 	const [kW, setKW] = useState('');
 	const [usages, setUsages] = useState([null, null, null, null, null, null, null, null, null, null, null, null]);
-	const [nextMenues, setNextMenues] = useState({});
 	const [menues, setMenues] = useState([]);
 	const [areaCode, setAreaCode] = useState('');
+	const [nextCompany, setNextCompany] = useState({});
+	const [nextMenues, setNextMenues] = useState({});
+	const [nextMenu, setNextMenu] = useState({});
 
 	return (
 			<div className="view">
@@ -35,10 +39,14 @@ const View = props => {
 					<MenuesContext.Provider value={[menues, setMenues]}>
 					<AreaCodeContext.Provider value={[areaCode, setAreaCode]}>
 					<MainInfo />
+					<NextCompanyContext.Provider value={[nextCompany, setNextCompany]}>
 					<NextMenuesContext.Provider value={[nextMenues, setNextMenues]}>
+					<NextMenuContext.Provider value={[nextMenu, setNextMenu]}>
 					<MainTop companies={props.companies} />
-					{/* <MainBottom /> */}
+					<MainBottom />
+					</NextMenuContext.Provider>
 					</NextMenuesContext.Provider>
+					</NextCompanyContext.Provider>
 					</AreaCodeContext.Provider>
 					</MenuesContext.Provider>
 					</UsagesContext.Provider>

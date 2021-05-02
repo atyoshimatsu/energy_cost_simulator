@@ -1,15 +1,16 @@
 import React, { useContext, useState } from "react"
-import { CompanyContext, NextMenuesContext, AreaCodeContext, MenuesContext } from '../View'
+import { CompanyContext, MenuesContext, AreaCodeContext, NextMenuesContext, NextCompanyContext } from '../View'
 
 const MainTopCompany = props => {
   const [company, setCompany] = useContext(CompanyContext);
   const [menues, setMenues] = useContext(MenuesContext);
   const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
+  const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 
   const [inputKeyword, setInputKeyword] = useState('');
   const [searchResultCompanies, setSearchResultCompanies] = useState(props.companies);
-  const [nextCompany, setNextCompany] = useState('');
+  // const [nextCompany, setNextCompany] = useState('');
 
   const handleChange=(e)=>{
     setInputKeyword(e.target.value);

@@ -1,17 +1,21 @@
-import React from "react"
-import PropTypes from "prop-types"
-class MainBottomChart extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      presentCost: [],
-      nextCost: [],
-      presentCostTotal: 0,
-      nextCostTotal: 0,
-    };
-  }
+import React, { useContext, useState } from "react"
+import { AreaCodeContext, CompanyContext, KWContext, MenuContext, NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
 
-  demandCurveCalculator=(contract_type) => {
+const MainBottomChart = () => {
+  const [company, setCompany] = useContext(CompanyContext);
+  const [menu, setMenu] = useContext(MenuContext);
+  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
+  const [usages, setUsages] = useContext(UsagesContext);
+  const [kW, setKW] = useContext(KWContext);
+  const [nextMenu, setNextMenu] = useContext(NextMenuContext);
+  const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
+
+  const [presentCost, setPresentCost] = useState([]);
+  const [nextCost, setNextCost] = useState([]);
+  const [presentCostTotal, setPresentCostTotal] = useState(0);
+  const [nextCostTotal, setNextCostTotal] = useState(0);
+
+  const demandCurveCalculator=(contract_type) => {
     const demandCurves = [[[797676,765744,571740,592077,680596,627036,601145,754227,804339,1075090,919277,846846],
                             [2015752,1703704,1276424,1335439,1766128,1513165,1424173,1626248,1948186,2633695,2277067,2166494],
                             [5849424,4932095,4380726,4641009,6511132,5723957,4882999,4772873,5864779,7482188,6948635,6026947],
@@ -34,11 +38,10 @@ class MainBottomChart extends React.Component {
                             [95718,103457,119938,129376,157939,150990,136284,125138,100554,97090,87590,86728]]];
     let demandCurve = []
     if (contract_type == 1 || contract_type == 2) {
-      demandCurve = demandCurves[0][this.props.areaCode - 1];
+      demandCurve = demandCurves[0][areaCode - 1];
     } else {
-      demandCurve = demandCurves[1][this.props.areaCode - 1];
+      demandCurve = demandCurves[1][areaCode - 1];
     }
-    let usages = this.props.usages;
     let chartUsages = [];
     let i = 0;
     usages.forEach(usage => {
@@ -53,31 +56,31 @@ class MainBottomChart extends React.Component {
         }
         chartUsages.push(Math.floor(temp_usages/k));
       } else {
-        chartUsages.push(usage); 
+        chartUsages.push(usage);
       }
       i++;
     });
     return chartUsages;
   }
 
-  costCalculator12=(usage, menu, company) => {
+  const costCalculator12=(usage, menu, company) => {
     let ec = 0;
     let dc = 0;
     let threshold = 0;
 
     if ([6, 7, 8].indexOf(menu["area"]) == -1 || ([6, 7, 8].indexOf(menu["area"]) >= 0 && menu["contract_type"] == 2)) {
       //アンペア制 従量電灯B/C
-      ec = menu["EC"] * parseFloat(this.props.kW);
+      ec = menu["EC"] * parseFloat(kW);
       if (usage == 0  && company.id != 17){
-        ec = menu["EC"] * parseFloat(this.props.kW) / 2;
+        ec = menu["EC"] * parseFloat(kW) / 2;
       }
 
       if(company.id == 17 && menu["area"] == 6){//みんな電力 最低料金制の従量電灯B
-        ec = 55*(this.props.kW - 6) + 165;
+        ec = 55*(kW - 6) + 165;
       } else if(company.id == 17 && menu["area"] == 7) {
-        ec = 33*(this.props.kW - 6) + 104.5;
+        ec = 33*(kW - 6) + 104.5;
       } else if(company.id == 17 && menu["area"] == 8) {
-        ec = 60.5*(this.props.kW - 6) + 176;
+        ec = 60.5*(kW - 6) + 176;
       }
 
       for (let dc_step = 1; dc_step <= Object.keys(menu["DC"]).length; dc_step++ ) {
@@ -118,19 +121,19 @@ class MainBottomChart extends React.Component {
     return Math.floor(ec+dc);
   }
 
-  costCalculator3=(usage, menu, company, month)=> {
+  const costCalculator3=(usage, menu, company, month)=> {
     let dc = 0;
     let threshold = 0;
     let dcsSummer = [];
     let dcsOther = [];
     let thresholdsSummer = [];
     let thresholdsOther = [];
-    let kW = this.props.kW;
+    // let kW = this.props.kW;
     let ec = menu["EC"] * parseFloat(kW);
 
-    if (usage == 0 ){
+    if (usage === 0 ){
       ec = menu["EC"] * parseFloat(kW) / 2;
-    } 
+    }
 
     for (let dc_step = 1; dc_step <= Object.keys(menu["DC"]).length; dc_step++ ) {
       if (menu["DC"][`DC_${dc_step}`].summer == true) {
@@ -167,43 +170,39 @@ class MainBottomChart extends React.Component {
     return Math.floor(ec+dc);
   }
 
-  getMaxScale=(num)=> {
+  const getMaxScale=(num)=> {
     let digits = String(num).length;
     return Math.ceil(num / 10**(digits - 1)) * 10**(digits - 1);
   }
 
-
-
-  onClickDrawChart=()=>{
-    let presentCompany = this.props.company;
-    let nextCompany = this.props.nextCompany;
-    let presentMenu = this.props.menu;
-    let nextMenu = this.props.nextMenu;
+  const onClickDrawChart=()=>{
+    let presentCompany = company;
+    let presentMenu = menu;
     let presentCost_temp = [];
     let nextCost_temp = [];
     let presentCostTotal_temp = 0;
     let nextCostTotal_temp = 0;
-    let chartUsages = this.demandCurveCalculator(presentMenu.contract_type);
+    let chartUsages = demandCurveCalculator(presentMenu.contract_type);
 
     let month = 0;
     chartUsages.forEach(usage =>{
       if (presentMenu["contract_type"] == 1 || presentMenu["contract_type"] == 2) {
-        presentCost_temp.push(this.costCalculator12(usage, presentMenu, presentCompany));
+        presentCost_temp.push(costCalculator12(usage, presentMenu, presentCompany));
       } else if (presentMenu["contract_type"] == 3) {
-        presentCost_temp.push(this.costCalculator3(usage, presentMenu, presentCompany, month));
+        presentCost_temp.push(costCalculator3(usage, presentMenu, presentCompany, month));
       }
       if (nextMenu["contract_type"] == 1 || nextMenu["contract_type"] == 2) {
-        nextCost_temp.push(this.costCalculator12(usage, nextMenu, nextCompany));
+        nextCost_temp.push(costCalculator12(usage, nextMenu, nextCompany));
       } else if (nextMenu["contract_type"] == 3) {
-        nextCost_temp.push(this.costCalculator3(usage, nextMenu, nextCompany, month));
+        nextCost_temp.push(costCalculator3(usage, nextMenu, nextCompany, month));
       }
       presentCostTotal_temp += presentCost_temp[month];
       nextCostTotal_temp += nextCost_temp[month];
       month++;
     });
-    
-    this.setState({presentCostTotal: presentCostTotal_temp})
-    this.setState({nextCostTotal: nextCostTotal_temp})
+
+    setPresentCostTotal(presentCostTotal_temp);
+    setNextCostTotal(nextCostTotal_temp);
 
     if (typeof(energyChart) != 'undefined' && energyChart) {
       energyChart.destroy();
@@ -254,9 +253,9 @@ class MainBottomChart extends React.Component {
             type: 'linear',
             position: 'left',
             ticks: {
-              suggestedMax: this.getMaxScale(Math.max.apply(null, presentCost_temp.concat(nextCost_temp))),
+              suggestedMax: getMaxScale(Math.max.apply(null, presentCost_temp.concat(nextCost_temp))),
               suggestedMin: 0,
-              stepSize: this.getMaxScale(Math.max.apply(null, presentCost_temp.concat(nextCost_temp)))/10,
+              stepSize: getMaxScale(Math.max.apply(null, presentCost_temp.concat(nextCost_temp)))/10,
               callback: function(value, index, values){
                 return value + '円'
               }
@@ -266,9 +265,9 @@ class MainBottomChart extends React.Component {
             type: 'linear',
             position: 'right',
             ticks: {
-              suggestedMax: this.getMaxScale(Math.max.apply(null, chartUsages)),
+              suggestedMax: getMaxScale(Math.max.apply(null, chartUsages)),
               suggestedMin: 0,
-              stepSize: this.getMaxScale(Math.max.apply(null, chartUsages))/10,
+              stepSize: getMaxScale(Math.max.apply(null, chartUsages))/10,
               callback: function(value, index, values){
                 return value + 'kWh'
               }
@@ -278,33 +277,33 @@ class MainBottomChart extends React.Component {
       }
     });
   }
-  
-  render () {
-    let button = [];
-    if (this.props.nextMenu != "" && this.props.nextCompany != "") {
-      button = (<div className="main_bottom_btn_calc" onClick={this.onClickDrawChart.bind(this)}>電気料金を計算する！</div>)
-    } else {
-      button = (<div className="main_bottom_btn_calc" style={{background: "darkgray", cursor: "default"}}>電気料金を計算する！</div>)     
-    }
-    let result = this.state.nextCostTotal - this.state.presentCostTotal;
-    let resultMessage = [];
-    if (result < 0 && this.state.nextCostTotal != 0 && this.state.presentCostTotal != 0) {
-      result = Math.abs(result)
-      resultMessage = (<div className="main_bottom_result"><div>年間で<strong style={{color: "red"}}>{result}円</strong>お得になります！</div></div>)
-    } else if (result >= 0 && this.state.nextCostTotal != 0 && this.state.presentCostTotal != 0) {
-      resultMessage = (<div className="main_bottom_result"><div>年間で<strong style={{color: "steelblue"}}>{result}円</strong>の費用増になります</div></div>)
-    }
 
-    return (
-      <React.Fragment>
-        {button}
-        {resultMessage}
-        <div className="main_bottom_chart">
-          <canvas id="energy_chart" />
-        </div>
-      </React.Fragment>
-    );
+  let button = [];
+  if (Object.values(nextMenu).length !== 0 && Object.values(nextCompany).length !== 0) {
+    button = (<div className="main_bottom_btn_calc" onClick={onClickDrawChart.bind(this)}>電気料金を計算する！</div>)
+  } else {
+    button = (<div className="main_bottom_btn_calc" style={{background: "darkgray", cursor: "default"}}>電気料金を計算する！</div>)
   }
+
+  let result = nextCostTotal - presentCostTotal;
+  let resultMessage = [];
+  if (result < 0 && nextCostTotal != 0 && presentCostTotal != 0) {
+    result = Math.abs(result)
+    resultMessage = (<div className="main_bottom_result"><div>年間で<strong style={{color: "red"}}>{result}円</strong>お得になります！</div></div>)
+  } else if (result >= 0 && nextCostTotal != 0 && presentCostTotal != 0) {
+    resultMessage = (<div className="main_bottom_result"><div>年間で<strong style={{color: "steelblue"}}>{result}円</strong>の費用増になります</div></div>)
+  }
+
+  return (
+    <>
+      {button}
+      {resultMessage}
+      <div className="main_bottom_chart">
+        <canvas id="energy_chart" />
+      </div>
+    </>
+  );
+
 }
 
 export default MainBottomChart
