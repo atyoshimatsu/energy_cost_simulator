@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { MenuContext, KWContext, AreaCodeContext} from '../View'
+import { IsAmpereArea } from '../consts'
 
 const MainInfoContract = () => {
   const [kw, setKW] = useContext(KWContext);
@@ -12,7 +13,7 @@ const MainInfoContract = () => {
 
 
   let contractInput = []
-  if (menu.contract_type === 1 && ["6", "7", "8"].indexOf(areaCode) === -1 ) {
+  if (menu.contract_type === 1 && IsAmpereArea(areaCode) ) {
     contractInput.push(<option value="1" key="1">10A</option>)
     contractInput.push(<option value="1.5" key="1.5">15A</option>)
     for (let i = 2; i <= 6; i++) {
