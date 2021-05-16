@@ -79,8 +79,8 @@ const MainInfoUsage = () => {
           <input className="main_info_usage-input_monthly_form" key="3" placeholder=" 7月の使用量" type="text" onChange={e => handleChange(e, 3)} style={styles[3]}/>
           <input className="main_info_usage-input_monthly_form" key="4" placeholder=" 8月の使用量" type="text" onChange={e => handleChange(e, 4)} style={styles[4]}/>
           <input className="main_info_usage-input_monthly_form" key="5" placeholder=" 9月の使用量" type="text" onChange={e => handleChange(e, 5)} style={styles[5]}/>
-        </div>
-        <div className="main_info_usage-input_monthly">
+        {/* </div>
+        <div className="main_info_usage-input_monthly"> */}
           <input className="main_info_usage-input_monthly_form" key="6" placeholder="10月の使用量" type="text" onChange={e => handleChange(e, 6)} style={styles[6]}/>
           <input className="main_info_usage-input_monthly_form" key="7" placeholder="11月の使用量" type="text" onChange={e => handleChange(e, 7)} style={styles[7]}/>
           <input className="main_info_usage-input_monthly_form" key="8" placeholder="12月の使用量" type="text" onChange={e => handleChange(e, 8)} style={styles[8]}/>

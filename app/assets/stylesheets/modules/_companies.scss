@@ -38,27 +38,35 @@ body {
     display: flex;
     justify-content: space-between;
     margin-right: 20px;
-    &_csv-import {
-      @include button-set(30px, $btn-color, white, 16px);
+    &_config{
+      display: flex;
+      justify-content: space-between;
+      &_csv-import {
+        @include button-set(30px, $btn-color, white, 16px);
+      }
+      &_howtouse {
+        @include button-set(30px, $btn-color, white, 16px);
+      }
     }
-    &_howtouse {
-      @include button-set(30px, $btn-color, white, 16px);
-    }
-    &_user-name {
-      margin: auto 15px;
-      text-align: center;
-      color: tomato;
-      font-size: 18px;
-    }
-    &_logout {
-      margin-left: 10px;
-      text-align: center;
-      color: tomato;
-      font-size: 18px;
-      text-decoration: none;
-      &:hover {
+    &_user{
+      display: flex;
+      justify-content: space-between;
+      &_username {
+        margin: auto 15px;
+        text-align: center;
         color: tomato;
+        font-size: 18px;
+      }
+      &_logout {
+        margin-left: 10px;
+        text-align: center;
+        color: tomato;
+        font-size: 18px;
         text-decoration: none;
+        &:hover {
+          color: tomato;
+          text-decoration: none;
+        }
       }
     }
   }
@@ -70,7 +78,7 @@ body {
     padding-top: $header-height;
     z-index: 1;
     .main_info{
-      @include area-set(calc(100vh - #{$header-height}), 100vw, 15px, calc(100vw/5), 0, calc(100vw/5), white);
+      @include area-set(calc(100vh - #{$header-height}), 100vw, 15px, calc(100vw/6), 0, calc(100vw/6), white);
       overflow: scroll;
       &_title {
         height: 36px;
@@ -189,10 +197,11 @@ body {
         }
       }
       &_usage-input{
-        padding: 0 20px 40px;
+        padding: 0 5px 40px;
         &_monthly{
           display: flex;
           justify-content: center;
+          flex-wrap: wrap;
           &_form{
             height: 30px;
             width: 100px;
@@ -200,7 +209,7 @@ body {
             text-align: center;
             border-radius: 3px;
             border: 1px solid #ccc;
-            margin: 5px 10px;
+            margin: 5px 7px;
           }
         }
       }
@@ -212,7 +221,7 @@ body {
       }
     }
     .main_top {
-      @include area-set(100vh, 100vw, 15px, calc(100vw/5), 0, calc(100vw/5), white);
+      @include area-set(100vh, 100vw, 15px, calc(100vw/6), 0, calc(100vw/6), white);
       padding-bottom: 40px;
       overflow: scroll;
       &_title {
@@ -288,10 +297,10 @@ body {
             }
           }
         }
-      }  
+      }
     }
     .main_bottom {
-      @include area-set(100vh, 100vw, 15px, calc(100vw/5), 0, calc(100vw/5), white);
+      @include area-set(100vh, 100vw, 15px, calc(100vw/6), 0, calc(100vw/6), white);
       overflow: scroll;
       &_title {
         height: 36px;
@@ -324,7 +333,7 @@ body {
         display: flex;
         justify-content: start;
         vertical-align: bottom;
-        &_title{ 
+        &_title{
           @include title-set(18px);
         }
         &_title_alert {
@@ -332,7 +341,7 @@ body {
         }
         &_name {
           padding-left: 20px;
-          @include font-set(18px, salmon);  
+          @include font-set(18px, salmon);
         }
       }
       &_menu-list{
@@ -432,4 +441,110 @@ body {
       -ms-transform: translate(-$side-bar-width, 0);
        -o-transform: translate(-$side-bar-width, 0);
           transform: translate(-$side-bar-width, 0);
+}
+
+@media screen and (max-width: 1000px) {
+  $header-height: 100px;
+  .nav{
+    height: $header-height;
+    &_buttons {
+      display: block;
+      align-items: center;
+      &_config {
+        justify-content: flex-end;
+      }
+      &_user {
+        padding-top: 10px;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .wrapper {
+    .main {
+      padding-top: $header-height;
+      .main_info {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+      .main_top {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+      .main_bottom {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  $header-height: 140px;
+  .nav{
+    height: $header-height;
+    display: block;
+    &_title {
+      justify-content: center;
+    }
+    &_buttons {
+      display: flex;
+      align-items: center;
+      &_config {
+        justify-content: flex-end;
+      }
+      &_user {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .wrapper {
+    .main {
+      padding-top: $header-height;
+      .main_info {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+      .main_top {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+      .main_bottom {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  $header-height: 180px;
+  .nav{
+    height: $header-height;
+    display: block;
+    &_title {
+      justify-content: center;
+    }
+    &_buttons {
+      display: block;
+      align-items: center;
+      &_config {
+        justify-content: flex-end;
+      }
+      &_user {
+        padding-top: 10px;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .wrapper {
+    .main {
+      padding-top: $header-height;
+      .main_info {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+      .main_top {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+      .main_bottom {
+        @include area-set(100vh, 100vw, 15px, calc(100vw/50), 0, calc(100vw/50), white);
+      }
+    }
+  }
 }

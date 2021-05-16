@@ -16,10 +16,14 @@ class Nav extends React.Component {
           <NavTitle />
         </div>
         <div className="nav_buttons">
-          <NavButtonsCsvImport user={this.props.user}/>
-          <NavButtonsHowToUse />
-          <NavButtonsUserName user={this.props.user}/>
-          <NavButtonsLogout />
+          <div className="nav_buttons_config">
+            <NavButtonsCsvImport user={this.props.user}/>
+            <NavButtonsHowToUse />
+          </div>
+          <div className="nav_buttons_user">
+            <NavButtonsUserName user={this.props.user}/>
+            <NavButtonsLogout />
+          </div>
         </div>
       </div>
     );

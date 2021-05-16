@@ -12,7 +12,7 @@ class NavButtonsHowToUse extends React.Component {
 
   render () {
     return (
-      <div className="nav_buttons_howtouse" onClick={this.onClick}>使い方</div>
+      <div className="nav_buttons_config_howtouse" onClick={this.onClick}>使い方</div>
     );
   }
 }
