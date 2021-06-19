@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react"
-import { CompanyContext, AreaCodeContext, MenuesContext } from '../View'
+import React, { useContext, useState } from "react";
+import { StateContext } from '../context/context';
 
 const MainInfoCompany = () => {
-  const [company, setCompany] = useContext(CompanyContext);
-  const [menues, setMenues] = useContext(MenuesContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
+  const [state, setState] = useContext(StateContext);
 
   const [isFound, setIsFound] = useState(true);
   const [companies, setCompanies] = useState([]);
@@ -30,18 +28,22 @@ const MainInfoCompany = () => {
   }
 
   const onClickSetCompany=(selectedCompany)=>{
+    console.log('setState前',state);
     setInputKeyword(selectedCompany.name);
     setCompanies([]);
-    setCompany(selectedCompany);
+    state.company = selectedCompany;
+    setState(state);
+    console.log('setState後' ,state);
 
-    if (selectedCompany.id != "" && areaCode != "") {
-      fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${areaCode}`,{
+    if (selectedCompany.id != "" && state.areaCode != "") {
+      fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${state.areaCode}`,{
         method: 'GET'
       })
       .then(response => response.json())
       .then(data => {
         if (data.length != 0) {
-          setMenues(data);
+          state.menues = data;
+          setState(state);
         }
       });
     }
@@ -63,7 +65,7 @@ const MainInfoCompany = () => {
       <div className="main_info_company-title_alert"> 電力会社がみつかりません</div>
     )
   }
-
+  console.log(state);
   return (
     <>
       <div className="main_info_company">

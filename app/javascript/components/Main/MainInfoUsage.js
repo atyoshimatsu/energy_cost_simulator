@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react"
+import { StateContext } from '../context/context';
 import { CompanyContext, MenuContext, KWContext, UsagesContext, AreaCodeContext } from '../View'
 import { IsAmpereArea } from '../consts'
 
 const MainInfoUsage = () => {
-  const [company, setCompany] = useContext(CompanyContext);
+  const [state, setState] = useContext(StateContext);
   const [menu, setMenu] = useContext(MenuContext);
   const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [kW, setKW] = useContext(KWContext);
@@ -54,8 +55,8 @@ const MainInfoUsage = () => {
     }
   });
 
-  if ((IsAmpereArea(areaCode) && company !== {} && menu !== {} && kW !== '' && areaCode !== '' && alertFlag === 0 && nullCheck === false)
-  || (!IsAmpereArea(areaCode) && company !== {} && menu !== {} && areaCode !== '' && alertFlag === 0 && nullCheck === false)) {
+  if ((IsAmpereArea(areaCode) && state.company !== {} && menu !== {} && kW !== '' && areaCode !== '' && alertFlag === 0 && nullCheck === false)
+  || (!IsAmpereArea(areaCode) && state.company !== {} && menu !== {} && areaCode !== '' && alertFlag === 0 && nullCheck === false)) {
     button = (
       <div className="main_info_process_btn_to_top" onClick={onClickToTop} style={{background: "tomato"}}>次へ</div>
     );

@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react"
-import { CompanyContext, MenuesContext, AreaCodeContext, NextMenuesContext, NextCompanyContext } from '../View'
+import { MenuesContext, AreaCodeContext, NextMenuesContext, NextCompanyContext } from '../View'
 
 const MainTopCompany = props => {
-  const [company, setCompany] = useContext(CompanyContext);
   const [menues, setMenues] = useContext(MenuesContext);
   const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
@@ -77,7 +76,7 @@ const MainTopCompany = props => {
         {alertMessage}
       </div>
       <div className="main_top_company-search">
-        <input className="main_top_company-search_form" onChange={handleChange} onKeyUp={onKeyUpCompany} placeholder=" ex. 東京電力" type="text" />
+        <input className="main_top_company-search_form" onChange={handleChange} onKeyUp={onKeyUpCompany} placeholder=" ex. 東京電力エナジーパートナー" type="text" />
       </div>
       <div className="main_top_company-search_result">
         <div className="card-columns">
