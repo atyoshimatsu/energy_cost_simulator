@@ -1,9 +1,9 @@
-import { object } from "prop-types";
 import React, { useContext } from "react"
-import { MenuContext, NextMenuContext, NextMenuesContext } from '../View'
+import { StateContext } from "../context/context";
+import { NextMenuContext, NextMenuesContext } from '../View'
 
 const MainBottomMenu = () => {
-  const [menu, setMenu] = useContext(MenuContext);
+  const [state, setState] = useContext(StateContext);
   const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
   const [nextMenu, setNextMenu] = useContext(NextMenuContext);
 
@@ -13,7 +13,7 @@ const MainBottomMenu = () => {
   let searchResult = [];
   if (nextMenues.length != 0) {
     for (let num in nextMenues) {
-      if (nextMenues[num].contract_type === menu.contract_type) {
+      if (nextMenues[num].contract_type === state.menu.contract_type) {
         searchResult.push(
           <option value={num} key={nextMenues[num].id}>{nextMenues[num].name}</option>
         )

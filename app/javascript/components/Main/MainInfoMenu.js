@@ -1,12 +1,14 @@
 import React, { useContext } from "react"
-import { MenuContext, MenuesContext } from '../View'
+import { StateContext } from "../context/context";
+import { MenuesContext } from '../View'
 
 const MainInfoMenu = () => {
-const [menues, setMenues] =useContext(MenuesContext);
-const [menu, setMenu] =useContext(MenuContext);
+  const [state, setState] = useContext(StateContext);
+  const [menues, setMenues] =useContext(MenuesContext);
 
   const handleChange=(e)=>{
-    setMenu(menues[e.target.value]);
+    state.menu = menues[e.target.value];
+    setState(menues[e.target.value]);
   }
 
   let searchResult = [];

@@ -6,7 +6,6 @@ import MainBottom from "./Main/MainBottom"
 import Sidebar from "./Sidebar"
 import { StateContext, initState } from "./context/context"
 
-export const MenuContext = React.createContext()
 export const KWContext = React.createContext()
 export const UsagesContext = React.createContext()
 export const MenuesContext = React.createContext()
@@ -18,7 +17,6 @@ export const NextMenuContext = React.createContext()
 
 const View = props => {
 	const [state, setState] = useState(initState);
-	const [menu, setMenu] = useState({});
 	const [kW, setKW] = useState('');
 	const [usages, setUsages] = useState([null, null, null, null, null, null, null, null, null, null, null, null]);
 	const [menues, setMenues] = useState([]);
@@ -33,7 +31,6 @@ const View = props => {
 				<div className="wrapper">
 				<div className="main">
 					<StateContext.Provider value={[state, setState]}>
-					<MenuContext.Provider value={[menu, setMenu]}>
 					<KWContext.Provider value={[kW, setKW]}>
 					<UsagesContext.Provider value={[usages, setUsages]}>
 					<MenuesContext.Provider value={[menues, setMenues]}>
@@ -51,7 +48,6 @@ const View = props => {
 					</MenuesContext.Provider>
 					</UsagesContext.Provider>
 					</KWContext.Provider>
-					</MenuContext.Provider>
 					</StateContext.Provider>
 				</div>
 				<Sidebar />

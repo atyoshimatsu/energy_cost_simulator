@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react"
-import { AreaCodeContext, KWContext, MenuContext, NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
+import { AreaCodeContext, KWContext, NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
 import { demandCurves, IsAmpereArea } from '../consts'
 import { StateContext } from '../context/context';
 
 const MainBottomChart = () => {
   const [state, setState] = useContext(StateContext);
-  const [menu, setMenu] = useContext(MenuContext);
   const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [usages, setUsages] = useContext(UsagesContext);
   const [kW, setKW] = useContext(KWContext);
@@ -157,7 +156,7 @@ const MainBottomChart = () => {
 
   const onClickDrawChart=()=>{
     let presentCompany = state.company;
-    let presentMenu = menu;
+    let presentMenu = state.menu;
     let presentCost_temp = [];
     let nextCost_temp = [];
     let presentCostTotal_temp = 0;
