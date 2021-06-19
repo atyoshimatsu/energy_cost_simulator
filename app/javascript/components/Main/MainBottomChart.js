@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react"
-import { AreaCodeContext, KWContext, NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
+import { AreaCodeContext, NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
 import { demandCurves, IsAmpereArea } from '../consts'
 import { StateContext } from '../context/context';
 
@@ -7,7 +7,6 @@ const MainBottomChart = () => {
   const [state, setState] = useContext(StateContext);
   const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [usages, setUsages] = useContext(UsagesContext);
-  const [kW, setKW] = useContext(KWContext);
   const [nextMenu, setNextMenu] = useContext(NextMenuContext);
   const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 
@@ -50,17 +49,17 @@ const MainBottomChart = () => {
     let threshold = 0;
     if (IsAmpereArea(menu["area"])|| (!IsAmpereArea(menu["area"]) && menu["contract_type"] == 2)) {
       //アンペア制 従量電灯B/C
-      ec = menu["EC"] * parseFloat(kW);
+      ec = menu["EC"] * parseFloat(state.kW);
       if (usage == 0  && company.id != 17){
-        ec = menu["EC"] * parseFloat(kW) / 2;
+        ec = menu["EC"] * parseFloat(state.kW) / 2;
       }
 
       if(company.id == 17 && menu["area"] == 6){//みんな電力 最低料金制の従量電灯B
-        ec = 55*(kW - 6) + 165;
+        ec = 55*(state.kW - 6) + 165;
       } else if(company.id == 17 && menu["area"] == 7) {
-        ec = 33*(kW - 6) + 104.5;
+        ec = 33*(state.kW - 6) + 104.5;
       } else if(company.id == 17 && menu["area"] == 8) {
-        ec = 60.5*(kW - 6) + 176;
+        ec = 60.5*(state.kW - 6) + 176;
       }
 
       for (let dc_step = 1; dc_step <= Object.keys(menu["DC"]).length; dc_step++ ) {

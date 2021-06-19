@@ -1,15 +1,15 @@
 import React, { useContext } from "react"
-import { KWContext, AreaCodeContext} from '../View'
+import { AreaCodeContext} from '../View'
 import { IsAmpereArea } from '../consts'
 import { StateContext } from "../context/context";
 
 const MainInfoContract = () => {
   const [state, setState] = useContext(StateContext);
-  const [kw, setKW] = useContext(KWContext);
   const [areaCode, setAreaCode] = useContext(AreaCodeContext);
 
   const handleChange=(e)=>{
-    setKW(e.target.value);
+    state.kW = e.target.value;
+    setState(state);
   }
 
 
