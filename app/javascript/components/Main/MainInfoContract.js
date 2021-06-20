@@ -6,12 +6,10 @@ const MainInfoContract = () => {
   const [state, setState] = useContext(StateContext);
 
   const handleChange=(e)=>{
-    state.kW = e.target.value;
-    setState(state);
+    setState({ ...state, kW: e.target.value });
   }
 
   let contractInput = []
-  console.log(state.menu.contract_type);
   if (state.menu.contract_type === 1 && IsAmpereArea(state.areaCode) ) {
     contractInput.push(<option value="1" key="1">10A</option>)
     contractInput.push(<option value="1.5" key="1.5">15A</option>)

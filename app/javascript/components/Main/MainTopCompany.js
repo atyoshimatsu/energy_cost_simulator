@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react"
 import { MenuesContext, NextMenuesContext, NextCompanyContext } from '../View'
 
 const MainTopCompany = props => {
-  const [menues, setMenues] = useContext(MenuesContext);
+  // const [menues, setMenues] = useContext(MenuesContext);
   const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
   const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 

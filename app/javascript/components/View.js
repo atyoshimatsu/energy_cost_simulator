@@ -16,11 +16,11 @@ export const NextMenuContext = React.createContext()
 const View = props => {
 	const [state, setState] = useState(initState);
 	const [usages, setUsages] = useState([null, null, null, null, null, null, null, null, null, null, null, null]);
-	const [menues, setMenues] = useState([]);
+	// const [menues, setMenues] = useState([]);
 	const [nextCompany, setNextCompany] = useState({});
 	const [nextMenues, setNextMenues] = useState({});
 	const [nextMenu, setNextMenu] = useState({});
-	console.log(state);
+
 	return (
 			<div className="view">
 				<Nav user={props.user} />
@@ -28,7 +28,7 @@ const View = props => {
 				<div className="main">
 					<StateContext.Provider value={[state, setState]}>
 					<UsagesContext.Provider value={[usages, setUsages]}>
-					<MenuesContext.Provider value={[menues, setMenues]}>
+					{/* <MenuesContext.Provider value={[menues, setMenues]}> */}
 					<MainInfo />
 					<NextCompanyContext.Provider value={[nextCompany, setNextCompany]}>
 					<NextMenuesContext.Provider value={[nextMenues, setNextMenues]}>
@@ -38,7 +38,7 @@ const View = props => {
 					</NextMenuContext.Provider>
 					</NextMenuesContext.Provider>
 					</NextCompanyContext.Provider>
-					</MenuesContext.Provider>
+					{/* </MenuesContext.Provider> */}
 					</UsagesContext.Provider>
 					</StateContext.Provider>
 				</div>

@@ -4,7 +4,6 @@ import { StateContext } from '../context/context';
 
 const MainInfoArea = () => {
   const [state, setState] = useContext(StateContext);
-  const [menues, setMenues] = useContext(MenuesContext);
 
   const handleChange=(e)=>{
     if (state.company.id != "" && e.target.value != "") {
@@ -14,12 +13,11 @@ const MainInfoArea = () => {
       .then(response => response.json())
       .then(data => {
         if (data.length != 0) {
-          setMenues(data);
+          setState({ ...state, menues: data});
         }
       });
     }
-    state.areaCode = e.target.value;
-    setState(state);
+    setState({ ...state, areaCode: e.target.value });
   }
 
   return (

@@ -28,12 +28,9 @@ const MainInfoCompany = () => {
   }
 
   const onClickSetCompany=(selectedCompany)=>{
-    // console.log('setState前',state);
     setInputKeyword(selectedCompany.name);
     setCompanies([]);
-    state.company = selectedCompany;
-    setState(state);
-    // console.log('setState後' ,state);
+    setState({ ...state, company: selectedCompany });
 
     if (selectedCompany.id != "" && state.areaCode != "") {
       fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${state.areaCode}`,{
@@ -42,8 +39,7 @@ const MainInfoCompany = () => {
       .then(response => response.json())
       .then(data => {
         if (data.length != 0) {
-          state.menues = data;
-          setState(state);
+          setState({...state, menues: data });
         }
       });
     }
