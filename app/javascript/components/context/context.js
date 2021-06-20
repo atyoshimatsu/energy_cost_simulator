@@ -8,9 +8,9 @@ export const initState = {
     usages: [null, null, null, null, null, null, null, null, null, null, null, null],
     menues: [],
     areaCode: '',
-    nextCompany: {},
+    nextCompany: { name: '' },
     nextMenues: {},
-    nextMenue: {},
+    nextMenu: {},
 };
 
 // export const CompanyContext = React.createContext();

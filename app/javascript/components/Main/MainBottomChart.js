@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react"
-import { NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
+import { NextMenuContext } from "../View";
 import { demandCurves, IsAmpereArea } from '../consts'
 import { StateContext } from '../context/context';
 
 const MainBottomChart = () => {
   const [state, setState] = useContext(StateContext);
   const [nextMenu, setNextMenu] = useContext(NextMenuContext);
-  const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 
   const [presentCost, setPresentCost] = useState([]);
   const [nextCost, setNextCost] = useState([]);
@@ -27,8 +26,8 @@ const MainBottomChart = () => {
       let k = 0;
       if (usage == "" || usage == null) {
         for (let j = 0; j < 12; j++) {
-          if (j != i && usages[j] != "" && usages[j] != null) {
-            temp_usages += usages[j]*(demandCurve[i]/demandCurve[j]);
+          if (j != i && state.usages[j] != "" && state.usages[j] != null) {
+            temp_usages += state.usages[j]*(demandCurve[i]/demandCurve[j]);
             k++;
           }
         }
@@ -168,9 +167,9 @@ const MainBottomChart = () => {
         presentCost_temp.push(costCalculator3(usage, presentMenu, presentCompany, month));
       }
       if (nextMenu["contract_type"] == 1 || nextMenu["contract_type"] == 2) {
-        nextCost_temp.push(costCalculator12(usage, nextMenu, nextCompany));
+        nextCost_temp.push(costCalculator12(usage, nextMenu, state.nextCompany));
       } else if (nextMenu["contract_type"] == 3) {
-        nextCost_temp.push(costCalculator3(usage, nextMenu, nextCompany, month));
+        nextCost_temp.push(costCalculator3(usage, nextMenu, state.nextCompany, month));
       }
       presentCostTotal_temp += presentCost_temp[month];
       nextCostTotal_temp += nextCost_temp[month];
@@ -255,7 +254,7 @@ const MainBottomChart = () => {
   }
 
   let button = [];
-  if (Object.values(nextMenu).length !== 0 && Object.values(nextCompany).length !== 0) {
+  if (Object.values(nextMenu).length !== 0 && Object.values(state.nextCompany).length !== 0) {
     button = (<div className="main_bottom_btn_calc" onClick={onClickDrawChart.bind(this)}>電気料金を計算する！</div>)
   } else {
     button = (<div className="main_bottom_btn_calc" style={{background: "darkgray", cursor: "default"}}>電気料金を計算する！</div>)

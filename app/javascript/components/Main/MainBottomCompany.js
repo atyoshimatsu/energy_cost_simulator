@@ -1,12 +1,12 @@
 import React, { useContext } from "react"
-import { NextCompanyContext}  from '../View'
+import { StateContext } from "../context/context";
 
 const MainBottomCompany = () => {
-  const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
+  const [state, setState] = useContext(StateContext);
   return(
     <>
       <div className="main_bottom_company">比較する電力会社</div>
-      <div className="main_bottom_company_name">{nextCompany.name}</div>
+      <div className="main_bottom_company_name">{state.nextCompany.name}</div>
     </>
   );
 }

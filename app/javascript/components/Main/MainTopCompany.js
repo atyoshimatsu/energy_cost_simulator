@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react"
-import { NextMenuesContext, NextCompanyContext } from '../View'
+import { NextMenuesContext } from '../View'
+import { StateContext } from '../context/context';
 
 const MainTopCompany = props => {
+  const [state, setState] = useContext(StateContext);
   const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
-  const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 
   const [inputKeyword, setInputKeyword] = useState('');
   const [searchResultCompanies, setSearchResultCompanies] = useState(props.companies);
@@ -26,8 +27,8 @@ const MainTopCompany = props => {
     });
   }
 
-  const onClickToBottom = async (company)=>{
-    setNextCompany(company);
+  const onClickToBottom = async (company) => {
+    setState({ ...state, nextCompany: company });
     if (state.areaCode != "") {
       await fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${state.areaCode}`,{
         method: 'GET'
