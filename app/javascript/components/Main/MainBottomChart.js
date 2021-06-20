@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react"
-import { AreaCodeContext, NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
+import { NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
 import { demandCurves, IsAmpereArea } from '../consts'
 import { StateContext } from '../context/context';
 
 const MainBottomChart = () => {
   const [state, setState] = useContext(StateContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [usages, setUsages] = useContext(UsagesContext);
   const [nextMenu, setNextMenu] = useContext(NextMenuContext);
   const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
@@ -18,9 +17,9 @@ const MainBottomChart = () => {
   const demandCurveCalculator=(contract_type) => {
     let demandCurve = []
     if (contract_type == 1 || contract_type == 2) {
-      demandCurve = demandCurves[0][areaCode - 1];
+      demandCurve = demandCurves[0][state.areaCode - 1];
     } else {
-      demandCurve = demandCurves[1][areaCode - 1];
+      demandCurve = demandCurves[1][state.areaCode - 1];
     }
     let chartUsages = [];
     let i = 0;

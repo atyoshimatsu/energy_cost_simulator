@@ -14,7 +14,7 @@ const MainInfo = () => {
 				<MainInfoCompany  />
 				<MainInfoArea />
 				<MainInfoMenu />
-				<MainInfoContract  />
+				<MainInfoContract />
 				<MainInfoUsage />
 			</form>
 		</div>

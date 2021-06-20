@@ -8,7 +8,6 @@ import { StateContext, initState } from "./context/context"
 
 export const UsagesContext = React.createContext()
 export const MenuesContext = React.createContext()
-export const AreaCodeContext = React.createContext()
 export const NextCompanyContext = React.createContext()
 export const NextMenuesContext = React.createContext()
 export const NextMenuContext = React.createContext()
@@ -18,11 +17,10 @@ const View = props => {
 	const [state, setState] = useState(initState);
 	const [usages, setUsages] = useState([null, null, null, null, null, null, null, null, null, null, null, null]);
 	const [menues, setMenues] = useState([]);
-	const [areaCode, setAreaCode] = useState('');
 	const [nextCompany, setNextCompany] = useState({});
 	const [nextMenues, setNextMenues] = useState({});
 	const [nextMenu, setNextMenu] = useState({});
-
+	console.log(state);
 	return (
 			<div className="view">
 				<Nav user={props.user} />
@@ -31,7 +29,6 @@ const View = props => {
 					<StateContext.Provider value={[state, setState]}>
 					<UsagesContext.Provider value={[usages, setUsages]}>
 					<MenuesContext.Provider value={[menues, setMenues]}>
-					<AreaCodeContext.Provider value={[areaCode, setAreaCode]}>
 					<MainInfo />
 					<NextCompanyContext.Provider value={[nextCompany, setNextCompany]}>
 					<NextMenuesContext.Provider value={[nextMenues, setNextMenues]}>
@@ -41,7 +38,6 @@ const View = props => {
 					</NextMenuContext.Provider>
 					</NextMenuesContext.Provider>
 					</NextCompanyContext.Provider>
-					</AreaCodeContext.Provider>
 					</MenuesContext.Provider>
 					</UsagesContext.Provider>
 					</StateContext.Provider>

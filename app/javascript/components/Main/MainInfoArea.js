@@ -1,11 +1,10 @@
 import React, {useContext,useState} from "react"
-import { AreaCodeContext, MenuesContext } from '../View'
+import { MenuesContext } from '../View'
 import { StateContext } from '../context/context';
 
 const MainInfoArea = () => {
   const [state, setState] = useContext(StateContext);
   const [menues, setMenues] = useContext(MenuesContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
 
   const handleChange=(e)=>{
     if (state.company.id != "" && e.target.value != "") {
@@ -19,7 +18,8 @@ const MainInfoArea = () => {
         }
       });
     }
-    setAreaCode(e.target.value);
+    state.areaCode = e.target.value;
+    setState(state);
   }
 
   return (

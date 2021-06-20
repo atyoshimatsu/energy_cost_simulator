@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react"
-import { MenuesContext, AreaCodeContext, NextMenuesContext, NextCompanyContext } from '../View'
+import { MenuesContext, NextMenuesContext, NextCompanyContext } from '../View'
 
 const MainTopCompany = props => {
   const [menues, setMenues] = useContext(MenuesContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
   const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
   const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 
@@ -31,8 +30,8 @@ const MainTopCompany = props => {
 
   const onClickToBottom=(company)=>{
     setNextCompany(company);
-    if (areaCode != "") {
-      fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${areaCode}`,{
+    if (state.areaCode != "") {
+      fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${state.areaCode}`,{
         method: 'GET'
       })
       .then(response => response.json())

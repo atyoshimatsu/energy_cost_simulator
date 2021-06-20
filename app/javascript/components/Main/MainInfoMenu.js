@@ -8,7 +8,7 @@ const MainInfoMenu = () => {
 
   const handleChange=(e)=>{
     state.menu = menues[e.target.value];
-    setState(menues[e.target.value]);
+    setState(state);
   }
 
   let searchResult = [];

@@ -28,12 +28,12 @@ const MainInfoCompany = () => {
   }
 
   const onClickSetCompany=(selectedCompany)=>{
-    console.log('setState前',state);
+    // console.log('setState前',state);
     setInputKeyword(selectedCompany.name);
     setCompanies([]);
     state.company = selectedCompany;
     setState(state);
-    console.log('setState後' ,state);
+    // console.log('setState後' ,state);
 
     if (selectedCompany.id != "" && state.areaCode != "") {
       fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${state.areaCode}`,{
@@ -65,7 +65,7 @@ const MainInfoCompany = () => {
       <div className="main_info_company-title_alert"> 電力会社がみつかりません</div>
     )
   }
-  console.log(state);
+  // console.log(state);
   return (
     <>
       <div className="main_info_company">

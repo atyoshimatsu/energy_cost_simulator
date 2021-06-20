@@ -1,20 +1,18 @@
 import React, { useContext } from "react"
-import { AreaCodeContext} from '../View'
 import { IsAmpereArea } from '../consts'
 import { StateContext } from "../context/context";
 
 const MainInfoContract = () => {
   const [state, setState] = useContext(StateContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
 
   const handleChange=(e)=>{
     state.kW = e.target.value;
     setState(state);
   }
 
-
   let contractInput = []
-  if (state.menu.contract_type === 1 && IsAmpereArea(areaCode) ) {
+  console.log(state.menu.contract_type);
+  if (state.menu.contract_type === 1 && IsAmpereArea(state.areaCode) ) {
     contractInput.push(<option value="1" key="1">10A</option>)
     contractInput.push(<option value="1.5" key="1.5">15A</option>)
     for (let i = 2; i <= 6; i++) {
