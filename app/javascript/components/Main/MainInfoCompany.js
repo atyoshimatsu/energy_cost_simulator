@@ -61,7 +61,7 @@ const MainInfoCompany = () => {
       <div className="main_info_company-title_alert"> 電力会社がみつかりません</div>
     )
   }
-  // console.log(state);
+
   return (
     <>
       <div className="main_info_company">

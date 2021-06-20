@@ -1,14 +1,10 @@
 import React, { useContext, useState } from "react"
-import { NextMenuContext } from "../View";
 import { demandCurves, IsAmpereArea } from '../consts'
 import { StateContext } from '../context/context';
 
 const MainBottomChart = () => {
   const [state, setState] = useContext(StateContext);
-  const [nextMenu, setNextMenu] = useContext(NextMenuContext);
 
-  const [presentCost, setPresentCost] = useState([]);
-  const [nextCost, setNextCost] = useState([]);
   const [presentCostTotal, setPresentCostTotal] = useState(0);
   const [nextCostTotal, setNextCostTotal] = useState(0);
 
@@ -166,10 +162,10 @@ const MainBottomChart = () => {
       } else if (presentMenu["contract_type"] == 3) {
         presentCost_temp.push(costCalculator3(usage, presentMenu, presentCompany, month));
       }
-      if (nextMenu["contract_type"] == 1 || nextMenu["contract_type"] == 2) {
-        nextCost_temp.push(costCalculator12(usage, nextMenu, state.nextCompany));
-      } else if (nextMenu["contract_type"] == 3) {
-        nextCost_temp.push(costCalculator3(usage, nextMenu, state.nextCompany, month));
+      if (state.nextMenu["contract_type"] == 1 || state.nextMenu["contract_type"] == 2) {
+        nextCost_temp.push(costCalculator12(usage, state.nextMenu, state.nextCompany));
+      } else if (state.nextMenu["contract_type"] == 3) {
+        nextCost_temp.push(costCalculator3(usage, state.nextMenu, state.nextCompany, month));
       }
       presentCostTotal_temp += presentCost_temp[month];
       nextCostTotal_temp += nextCost_temp[month];
@@ -254,7 +250,7 @@ const MainBottomChart = () => {
   }
 
   let button = [];
-  if (Object.values(nextMenu).length !== 0 && Object.values(state.nextCompany).length !== 0) {
+  if (Object.values(state.nextMenu).length !== 0 && Object.values(state.nextCompany).length !== 0) {
     button = (<div className="main_bottom_btn_calc" onClick={onClickDrawChart.bind(this)}>電気料金を計算する！</div>)
   } else {
     button = (<div className="main_bottom_btn_calc" style={{background: "darkgray", cursor: "default"}}>電気料金を計算する！</div>)

@@ -6,14 +6,8 @@ import MainBottom from "./Main/MainBottom"
 import Sidebar from "./Sidebar"
 import { StateContext, initState } from "./context/context"
 
-export const NextMenuesContext = React.createContext()
-export const NextMenuContext = React.createContext()
-
-
 const View = props => {
 	const [state, setState] = useState(initState);
-	const [nextMenues, setNextMenues] = useState({});
-	const [nextMenu, setNextMenu] = useState({});
 
 	return (
 			<div className="view">
@@ -22,12 +16,8 @@ const View = props => {
 				<div className="main">
 					<StateContext.Provider value={[state, setState]}>
 					<MainInfo />
-					<NextMenuesContext.Provider value={[nextMenues, setNextMenues]}>
-					<NextMenuContext.Provider value={[nextMenu, setNextMenu]}>
 					<MainTop companies={props.companies} />
 					<MainBottom />
-					</NextMenuContext.Provider>
-					</NextMenuesContext.Provider>
 					</StateContext.Provider>
 				</div>
 				<Sidebar />

@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react"
-import { NextMenuesContext } from '../View'
 import { StateContext } from '../context/context';
 
 const MainTopCompany = props => {
   const [state, setState] = useContext(StateContext);
-  const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
 
   const [inputKeyword, setInputKeyword] = useState('');
   const [searchResultCompanies, setSearchResultCompanies] = useState(props.companies);
@@ -28,7 +26,7 @@ const MainTopCompany = props => {
   }
 
   const onClickToBottom = async (company) => {
-    setState({ ...state, nextCompany: company });
+    let selectedNextMenues = [];
     if (state.areaCode != "") {
       await fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${state.areaCode}`,{
         method: 'GET'
@@ -36,11 +34,12 @@ const MainTopCompany = props => {
       .then(response => response.json())
       .then(data => {
         if (data.length != 0) {
-          setNextMenues(data);
+          selectedNextMenues = data;
         }
       });
     }
     $('html, body').animate({scrollTop:$('#main_bottom').offset().top - 50}, 400 , 'swing');
+    setState({ ...state, nextCompany: company, nextMenues: selectedNextMenues });
   }
 
   let serchResult = []

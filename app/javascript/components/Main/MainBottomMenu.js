@@ -1,22 +1,19 @@
 import React, { useContext } from "react"
 import { StateContext } from "../context/context";
-import { NextMenuContext, NextMenuesContext } from '../View'
 
 const MainBottomMenu = () => {
   const [state, setState] = useContext(StateContext);
-  const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
-  const [nextMenu, setNextMenu] = useContext(NextMenuContext);
 
-  const handleChange=(e)=>{
-    setNextMenu(nextMenues[e.target.value]);
+  const handleChange = (e) => {
+    setState({...state, nextMenu: state.nextMenues[e.target.value]});
   }
 
   let searchResult = [];
-  if (nextMenues.length != 0) {
-    for (let num in nextMenues) {
-      if (nextMenues[num].contract_type === state.menu.contract_type) {
+  if (state.nextMenues.length != 0) {
+    for (let num in state.nextMenues) {
+      if (state.nextMenues[num].contract_type === state.menu.contract_type) {
         searchResult.push(
-          <option value={num} key={nextMenues[num].id}>{nextMenues[num].name}</option>
+          <option value={num} key={state.nextMenues[num].id}>{state.nextMenues[num].name}</option>
         )
       }
     }
