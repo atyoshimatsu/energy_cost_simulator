@@ -10,6 +10,7 @@ const MainBottomMenu = () => {
   const handleChange=(e)=>{
     setNextMenu(nextMenues[e.target.value]);
   }
+
   let searchResult = [];
   if (nextMenues.length != 0) {
     for (let num in nextMenues) {

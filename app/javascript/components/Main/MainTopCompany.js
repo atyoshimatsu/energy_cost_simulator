@@ -1,21 +1,19 @@
 import React, { useContext, useState } from "react"
-import { MenuesContext, NextMenuesContext, NextCompanyContext } from '../View'
+import { NextMenuesContext, NextCompanyContext } from '../View'
 
 const MainTopCompany = props => {
-  // const [menues, setMenues] = useContext(MenuesContext);
   const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
   const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 
   const [inputKeyword, setInputKeyword] = useState('');
   const [searchResultCompanies, setSearchResultCompanies] = useState(props.companies);
-  // const [nextCompany, setNextCompany] = useState('');
 
   const handleChange=(e)=>{
     setInputKeyword(e.target.value);
   }
 
-  const onKeyUpCompany=()=>{
-    fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
+  const onKeyUpCompany = async ()=> {
+    await fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
       method: 'GET'
     })
     .then(response => response.json())
@@ -28,10 +26,10 @@ const MainTopCompany = props => {
     });
   }
 
-  const onClickToBottom=(company)=>{
+  const onClickToBottom = async (company)=>{
     setNextCompany(company);
     if (state.areaCode != "") {
-      fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${state.areaCode}`,{
+      await fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${state.areaCode}`,{
         method: 'GET'
       })
       .then(response => response.json())

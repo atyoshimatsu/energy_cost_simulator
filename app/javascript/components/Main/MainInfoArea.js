@@ -1,23 +1,24 @@
 import React, {useContext,useState} from "react"
-import { MenuesContext } from '../View'
 import { StateContext } from '../context/context';
 
 const MainInfoArea = () => {
   const [state, setState] = useContext(StateContext);
 
-  const handleChange=(e)=>{
+  const handleChange = async (e)=>{
+    e.persist();
+    let selectedMenues = [];
     if (state.company.id != "" && e.target.value != "") {
-      fetch(`/api/menu_search/menues?company_code=${state.company.id}&area_code=${e.target.value}`,{
+      await fetch(`/api/menu_search/menues?company_code=${state.company.id}&area_code=${e.target.value}`,{
         method: 'GET'
       })
       .then(response => response.json())
       .then(data => {
         if (data.length != 0) {
-          setState({ ...state, menues: data});
+          selectedMenues = data;
         }
       });
     }
-    setState({ ...state, areaCode: e.target.value });
+    setState({ ...state, areaCode: e.target.value, menues: selectedMenues });
   }
 
   return (

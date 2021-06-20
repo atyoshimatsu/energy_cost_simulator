@@ -5,7 +5,6 @@ import { StateContext } from '../context/context';
 
 const MainBottomChart = () => {
   const [state, setState] = useContext(StateContext);
-  const [usages, setUsages] = useContext(UsagesContext);
   const [nextMenu, setNextMenu] = useContext(NextMenuContext);
   const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
 
@@ -23,7 +22,7 @@ const MainBottomChart = () => {
     }
     let chartUsages = [];
     let i = 0;
-    usages.forEach(usage => {
+    state.usages.forEach(usage => {
       let temp_usages = 0;
       let k = 0;
       if (usage == "" || usage == null) {

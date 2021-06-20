@@ -5,7 +5,7 @@ export const initState = {
     company: {},
     menu: {},
     kW: '',
-    usage: [null, null, null, null, null, null, null, null, null, null, null, null],
+    usages: [null, null, null, null, null, null, null, null, null, null, null, null],
     menues: [],
     areaCode: '',
     nextCompany: {},

@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react"
 import { StateContext } from '../context/context';
-import { UsagesContext } from '../View'
 import { IsAmpereArea } from '../consts'
 
 const MainInfoUsage = () => {
   const [state, setState] = useContext(StateContext);
-  const [usages, setUsages] = useContext(UsagesContext);
 
-	const [stateUsages, setStateUsages] = useState(usages);
+	const [stateUsages, setStateUsages] = useState(state.usages);
   const [styles, setStyles] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
   const [alertFlag, setAlertFlag] = useState('');
 
@@ -17,7 +15,7 @@ const MainInfoUsage = () => {
 
     usages_copy[key] = e.target.value;
     setStateUsages(usages_copy);
-    setUsages(usages_copy);
+    setState({ ...state, usages:usages_copy });
 
     if (!/^[0-9]*$/.test(usages_copy[key]) && usages_copy[key] != null && usages_copy[key] != "") {
       styles_copy[key] = {background: "lightcoral"};

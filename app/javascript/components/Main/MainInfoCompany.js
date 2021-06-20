@@ -12,8 +12,8 @@ const MainInfoCompany = () => {
     setInputKeyword(e.target.value);
   }
 
-  const onKeyUpCompany=()=>{
-    fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
+  const onKeyUpCompany = async ()=>{
+    await fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
       method: 'GET'
     })
     .then(response => response.json())
@@ -27,13 +27,13 @@ const MainInfoCompany = () => {
     });
   }
 
-  const onClickSetCompany=(selectedCompany)=>{
+  const onClickSetCompany = async (selectedCompany)=>{
     setInputKeyword(selectedCompany.name);
     setCompanies([]);
     setState({ ...state, company: selectedCompany });
 
     if (selectedCompany.id != "" && state.areaCode != "") {
-      fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${state.areaCode}`,{
+      await fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${state.areaCode}`,{
         method: 'GET'
       })
       .then(response => response.json())
