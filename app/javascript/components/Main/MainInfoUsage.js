@@ -1,15 +1,11 @@
 import React, { useContext, useState } from "react"
-import { CompanyContext, MenuContext, KWContext, UsagesContext, AreaCodeContext } from '../View'
+import { StateContext } from '../context/context';
 import { IsAmpereArea } from '../consts'
 
 const MainInfoUsage = () => {
-  const [company, setCompany] = useContext(CompanyContext);
-  const [menu, setMenu] = useContext(MenuContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
-  const [kW, setKW] = useContext(KWContext);
-  const [usages, setUsages] = useContext(UsagesContext);
+  const [state, setState] = useContext(StateContext);
 
-	const [stateUsages, setStateUsages] = useState(usages);
+	const [stateUsages, setStateUsages] = useState(state.usages);
   const [styles, setStyles] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
   const [alertFlag, setAlertFlag] = useState('');
 
@@ -19,7 +15,7 @@ const MainInfoUsage = () => {
 
     usages_copy[key] = e.target.value;
     setStateUsages(usages_copy);
-    setUsages(usages_copy);
+    setState({ ...state, usages:usages_copy });
 
     if (!/^[0-9]*$/.test(usages_copy[key]) && usages_copy[key] != null && usages_copy[key] != "") {
       styles_copy[key] = {background: "lightcoral"};
@@ -54,8 +50,8 @@ const MainInfoUsage = () => {
     }
   });
 
-  if ((IsAmpereArea(areaCode) && company !== {} && menu !== {} && kW !== '' && areaCode !== '' && alertFlag === 0 && nullCheck === false)
-  || (!IsAmpereArea(areaCode) && company !== {} && menu !== {} && areaCode !== '' && alertFlag === 0 && nullCheck === false)) {
+  if ((IsAmpereArea(state.areaCode) && state.company !== {} && state.menu !== {} && state.kW !== '' && state.areaCode !== '' && alertFlag === 0 && nullCheck === false)
+  || (!IsAmpereArea(state.areaCode) && state.company !== {} && state.menu !== {} && state.areaCode !== '' && alertFlag === 0 && nullCheck === false)) {
     button = (
       <div className="main_info_process_btn_to_top" onClick={onClickToTop} style={{background: "tomato"}}>次へ</div>
     );

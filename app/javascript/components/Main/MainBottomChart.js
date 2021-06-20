@@ -1,37 +1,29 @@
 import React, { useContext, useState } from "react"
-import { AreaCodeContext, CompanyContext, KWContext, MenuContext, NextCompanyContext, NextMenuContext, UsagesContext } from "../View";
 import { demandCurves, IsAmpereArea } from '../consts'
+import { StateContext } from '../context/context';
 
 const MainBottomChart = () => {
-  const [company, setCompany] = useContext(CompanyContext);
-  const [menu, setMenu] = useContext(MenuContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
-  const [usages, setUsages] = useContext(UsagesContext);
-  const [kW, setKW] = useContext(KWContext);
-  const [nextMenu, setNextMenu] = useContext(NextMenuContext);
-  const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
+  const [state, setState] = useContext(StateContext);
 
-  const [presentCost, setPresentCost] = useState([]);
-  const [nextCost, setNextCost] = useState([]);
   const [presentCostTotal, setPresentCostTotal] = useState(0);
   const [nextCostTotal, setNextCostTotal] = useState(0);
 
   const demandCurveCalculator=(contract_type) => {
     let demandCurve = []
     if (contract_type == 1 || contract_type == 2) {
-      demandCurve = demandCurves[0][areaCode - 1];
+      demandCurve = demandCurves[0][state.areaCode - 1];
     } else {
-      demandCurve = demandCurves[1][areaCode - 1];
+      demandCurve = demandCurves[1][state.areaCode - 1];
     }
     let chartUsages = [];
     let i = 0;
-    usages.forEach(usage => {
+    state.usages.forEach(usage => {
       let temp_usages = 0;
       let k = 0;
       if (usage == "" || usage == null) {
         for (let j = 0; j < 12; j++) {
-          if (j != i && usages[j] != "" && usages[j] != null) {
-            temp_usages += usages[j]*(demandCurve[i]/demandCurve[j]);
+          if (j != i && state.usages[j] != "" && state.usages[j] != null) {
+            temp_usages += state.usages[j]*(demandCurve[i]/demandCurve[j]);
             k++;
           }
         }
@@ -50,17 +42,17 @@ const MainBottomChart = () => {
     let threshold = 0;
     if (IsAmpereArea(menu["area"])|| (!IsAmpereArea(menu["area"]) && menu["contract_type"] == 2)) {
       //アンペア制 従量電灯B/C
-      ec = menu["EC"] * parseFloat(kW);
+      ec = menu["EC"] * parseFloat(state.kW);
       if (usage == 0  && company.id != 17){
-        ec = menu["EC"] * parseFloat(kW) / 2;
+        ec = menu["EC"] * parseFloat(state.kW) / 2;
       }
 
       if(company.id == 17 && menu["area"] == 6){//みんな電力 最低料金制の従量電灯B
-        ec = 55*(kW - 6) + 165;
+        ec = 55*(state.kW - 6) + 165;
       } else if(company.id == 17 && menu["area"] == 7) {
-        ec = 33*(kW - 6) + 104.5;
+        ec = 33*(state.kW - 6) + 104.5;
       } else if(company.id == 17 && menu["area"] == 8) {
-        ec = 60.5*(kW - 6) + 176;
+        ec = 60.5*(state.kW - 6) + 176;
       }
 
       for (let dc_step = 1; dc_step <= Object.keys(menu["DC"]).length; dc_step++ ) {
@@ -155,8 +147,8 @@ const MainBottomChart = () => {
   }
 
   const onClickDrawChart=()=>{
-    let presentCompany = company;
-    let presentMenu = menu;
+    let presentCompany = state.company;
+    let presentMenu = state.menu;
     let presentCost_temp = [];
     let nextCost_temp = [];
     let presentCostTotal_temp = 0;
@@ -170,10 +162,10 @@ const MainBottomChart = () => {
       } else if (presentMenu["contract_type"] == 3) {
         presentCost_temp.push(costCalculator3(usage, presentMenu, presentCompany, month));
       }
-      if (nextMenu["contract_type"] == 1 || nextMenu["contract_type"] == 2) {
-        nextCost_temp.push(costCalculator12(usage, nextMenu, nextCompany));
-      } else if (nextMenu["contract_type"] == 3) {
-        nextCost_temp.push(costCalculator3(usage, nextMenu, nextCompany, month));
+      if (state.nextMenu["contract_type"] == 1 || state.nextMenu["contract_type"] == 2) {
+        nextCost_temp.push(costCalculator12(usage, state.nextMenu, state.nextCompany));
+      } else if (state.nextMenu["contract_type"] == 3) {
+        nextCost_temp.push(costCalculator3(usage, state.nextMenu, state.nextCompany, month));
       }
       presentCostTotal_temp += presentCost_temp[month];
       nextCostTotal_temp += nextCost_temp[month];
@@ -258,7 +250,7 @@ const MainBottomChart = () => {
   }
 
   let button = [];
-  if (Object.values(nextMenu).length !== 0 && Object.values(nextCompany).length !== 0) {
+  if (Object.values(state.nextMenu).length !== 0 && Object.values(state.nextCompany).length !== 0) {
     button = (<div className="main_bottom_btn_calc" onClick={onClickDrawChart.bind(this)}>電気料金を計算する！</div>)
   } else {
     button = (<div className="main_bottom_btn_calc" style={{background: "darkgray", cursor: "default"}}>電気料金を計算する！</div>)

@@ -1,23 +1,18 @@
 import React, { useContext, useState } from "react"
-import { CompanyContext, MenuesContext, AreaCodeContext, NextMenuesContext, NextCompanyContext } from '../View'
+import { StateContext } from '../context/context';
 
 const MainTopCompany = props => {
-  const [company, setCompany] = useContext(CompanyContext);
-  const [menues, setMenues] = useContext(MenuesContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
-  const [nextMenues, setNextMenues] = useContext(NextMenuesContext);
-  const [nextCompany, setNextCompany] = useContext(NextCompanyContext);
+  const [state, setState] = useContext(StateContext);
 
   const [inputKeyword, setInputKeyword] = useState('');
   const [searchResultCompanies, setSearchResultCompanies] = useState(props.companies);
-  // const [nextCompany, setNextCompany] = useState('');
 
   const handleChange=(e)=>{
     setInputKeyword(e.target.value);
   }
 
-  const onKeyUpCompany=()=>{
-    fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
+  const onKeyUpCompany = async ()=> {
+    await fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
       method: 'GET'
     })
     .then(response => response.json())
@@ -30,20 +25,21 @@ const MainTopCompany = props => {
     });
   }
 
-  const onClickToBottom=(company)=>{
-    setNextCompany(company);
-    if (areaCode != "") {
-      fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${areaCode}`,{
+  const onClickToBottom = async (company) => {
+    let selectedNextMenues = [];
+    if (state.areaCode != "") {
+      await fetch(`/api/menu_search/menues?company_code=${company.id}&area_code=${state.areaCode}`,{
         method: 'GET'
       })
       .then(response => response.json())
       .then(data => {
         if (data.length != 0) {
-          setNextMenues(data);
+          selectedNextMenues = data;
         }
       });
     }
     $('html, body').animate({scrollTop:$('#main_bottom').offset().top - 50}, 400 , 'swing');
+    setState({ ...state, nextCompany: company, nextMenues: selectedNextMenues });
   }
 
   let serchResult = []
@@ -77,7 +73,7 @@ const MainTopCompany = props => {
         {alertMessage}
       </div>
       <div className="main_top_company-search">
-        <input className="main_top_company-search_form" onChange={handleChange} onKeyUp={onKeyUpCompany} placeholder=" ex. 東京電力" type="text" />
+        <input className="main_top_company-search_form" onChange={handleChange} onKeyUp={onKeyUpCompany} placeholder=" ex. 東京電力エナジーパートナー" type="text" />
       </div>
       <div className="main_top_company-search_result">
         <div className="card-columns">

@@ -1,18 +1,17 @@
 import React, { useContext } from "react"
-import { MenuContext, MenuesContext } from '../View'
+import { StateContext } from "../context/context";
 
 const MainInfoMenu = () => {
-const [menues, setMenues] =useContext(MenuesContext);
-const [menu, setMenu] =useContext(MenuContext);
+  const [state, setState] = useContext(StateContext);
 
   const handleChange=(e)=>{
-    setMenu(menues[e.target.value]);
+    setState({ ...state, menu: state.menues[e.target.value]});
   }
 
   let searchResult = [];
   let i = 0;
-  if (menues.length != 0) {
-    menues.forEach(menu => {
+  if (state.menues.length != 0) {
+    state.menues.forEach(menu => {
       searchResult.push(
         <option value={i} key={menu.id}>{menu.name}</option>
       )

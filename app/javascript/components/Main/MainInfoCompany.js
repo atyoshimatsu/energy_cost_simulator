@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react"
-import { CompanyContext, AreaCodeContext, MenuesContext } from '../View'
+import React, { useContext, useState } from "react";
+import { StateContext } from '../context/context';
 
 const MainInfoCompany = () => {
-  const [company, setCompany] = useContext(CompanyContext);
-  const [menues, setMenues] = useContext(MenuesContext);
-  const [areaCode, setAreaCode] = useContext(AreaCodeContext);
+  const [state, setState] = useContext(StateContext);
 
   const [isFound, setIsFound] = useState(true);
   const [companies, setCompanies] = useState([]);
@@ -14,8 +12,8 @@ const MainInfoCompany = () => {
     setInputKeyword(e.target.value);
   }
 
-  const onKeyUpCompany=()=>{
-    fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
+  const onKeyUpCompany = async ()=>{
+    await fetch(`/api/company_search/companies?keyword=${inputKeyword}`,{
       method: 'GET'
     })
     .then(response => response.json())
@@ -29,19 +27,19 @@ const MainInfoCompany = () => {
     });
   }
 
-  const onClickSetCompany=(selectedCompany)=>{
+  const onClickSetCompany = async (selectedCompany)=>{
     setInputKeyword(selectedCompany.name);
     setCompanies([]);
-    setCompany(selectedCompany);
+    setState({ ...state, company: selectedCompany });
 
-    if (selectedCompany.id != "" && areaCode != "") {
-      fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${areaCode}`,{
+    if (selectedCompany.id != "" && state.areaCode != "") {
+      await fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${state.areaCode}`,{
         method: 'GET'
       })
       .then(response => response.json())
       .then(data => {
         if (data.length != 0) {
-          setMenues(data);
+          setState({...state, menues: data });
         }
       });
     }
