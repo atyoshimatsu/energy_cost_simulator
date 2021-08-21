@@ -1,20 +1,20 @@
-import React, { useContext } from "react"
-import { StateContext } from "../context/context";
+import React, { useContext } from 'react';
+import { StateContext } from '../context/context';
 
 const MainInfoMenu = () => {
   const [state, setState] = useContext(StateContext);
 
-  const handleChange=(e)=>{
-    setState({ ...state, menu: state.menues[e.target.value]});
-  }
+  const handleChange = (e) => {
+    setState({ ...state, menu: state.menues[e.target.value] });
+  };
 
-  let searchResult = [];
+  const searchResult = [];
   let i = 0;
   if (state.menues.length != 0) {
-    state.menues.forEach(menu => {
+    state.menues.forEach((menu) => {
       searchResult.push(
-        <option value={i} key={menu.id}>{menu.name}</option>
-      )
+        <option value={i} key={menu.id}>{menu.name}</option>,
+      );
       i++;
     });
   }
@@ -32,6 +32,6 @@ const MainInfoMenu = () => {
       </div>
     </>
   );
-}
+};
 
-export default MainInfoMenu
+export default MainInfoMenu;

@@ -1,25 +1,25 @@
-import React, {useContext,useState} from "react"
+import React, { useContext, useState } from 'react';
 import { StateContext } from '../context/context';
 
 const MainInfoArea = () => {
   const [state, setState] = useContext(StateContext);
 
-  const handleChange = async (e)=>{
+  const handleChange = async (e) => {
     e.persist();
     let selectedMenues = [];
-    if (state.company.id != "" && e.target.value != "") {
-      await fetch(`/api/menu_search/menues?company_code=${state.company.id}&area_code=${e.target.value}`,{
-        method: 'GET'
+    if (state.company.id != '' && e.target.value != '') {
+      await fetch(`/api/menu_search/menues?company_code=${state.company.id}&area_code=${e.target.value}`, {
+        method: 'GET',
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.length != 0) {
-          selectedMenues = data;
-        }
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.length != 0) {
+            selectedMenues = data;
+          }
+        });
     }
     setState({ ...state, areaCode: e.target.value, menues: selectedMenues });
-  }
+  };
 
   return (
     <>
@@ -41,6 +41,6 @@ const MainInfoArea = () => {
       </div>
     </>
   );
-}
+};
 
-export default MainInfoArea
+export default MainInfoArea;

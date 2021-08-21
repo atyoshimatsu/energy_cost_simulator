@@ -1,12 +1,12 @@
-import React from "react"
+import React from 'react';
 
 const MainInfoTitle = () => {
-  const onClickTo2=()=>{
-    $('html, body').animate({scrollTop:$('#main_top').offset().top - 50}, 400 , 'swing');
-  }
-  const onClickTo3=()=>{
-    $('html, body').animate({scrollTop:$('#main_bottom').offset().top - 50}, 400 , 'swing');
-  }
+  const onClickTo2 = () => {
+    $('html, body').animate({ scrollTop: $('#main_top').offset().top - 50 }, 400, 'swing');
+  };
+  const onClickTo3 = () => {
+    $('html, body').animate({ scrollTop: $('#main_bottom').offset().top - 50 }, 400, 'swing');
+  };
 
   return (
     <div className="main_info_title">
@@ -18,7 +18,6 @@ const MainInfoTitle = () => {
       </div>
     </div>
   );
+};
 
-}
-
-export default MainInfoTitle
+export default MainInfoTitle;
