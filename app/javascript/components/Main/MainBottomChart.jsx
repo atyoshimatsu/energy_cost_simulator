@@ -40,22 +40,23 @@ const MainBottomChart = () => {
   };
 
   const costCalculator12 = (usage, menu, company) => {
+    const kW = Number(state.kW);
     let ec = 0;
     let dc = 0;
     let threshold = 0;
-    if (IsAmpereArea(menu.area) || (!IsAmpereArea(menu.area) && menu.contractType === 2)) {
+    if (IsAmpereArea(menu.area) || (!IsAmpereArea(menu.area) && menu.contract_type === 2)) {
       // アンペア制 従量電灯B/C
-      ec = menu.EC * parseFloat(state.kW);
+      ec = menu.EC * parseFloat(kW);
       if (usage === 0 && company.id !== 17) {
-        ec = menu.EC * parseFloat(state.kW) * 0.5;
+        ec = menu.EC * parseFloat(kW) * 0.5;
       }
 
       if (company.id === 17 && menu.area === 6) { // みんな電力 最低料金制の従量電灯B
-        ec = 55 * (state.kW - 6) + 165;
+        ec = 55 * (kW - 6) + 165;
       } else if (company.id === 17 && menu.area === 7) {
-        ec = 33 * (state.kW - 6) + 104.5;
+        ec = 33 * (kW - 6) + 104.5;
       } else if (company.id === 17 && menu.area === 8) {
-        ec = 60.5 * (state.kW - 6) + 176;
+        ec = 60.5 * (kW - 6) + 176;
       }
 
       for (let dcStep = 1; dcStep <= Object.keys(menu.DC).length; dcStep += 1) {
@@ -67,7 +68,7 @@ const MainBottomChart = () => {
           threshold = menu.DC[`DC_${dcStep}`].threshold;
         }
       }
-    } else if (!IsAmpereArea(menu.area) && menu.contractType === 1) {
+    } else if (!IsAmpereArea(menu.area) && menu.contract_type === 1) {
       // 最低料金制
       ec = menu.EC;
 
@@ -97,16 +98,17 @@ const MainBottomChart = () => {
   };
 
   const costCalculator3 = (usage, menu, company, month) => {
+    const kW = Number(state.kW);
     let dc = 0;
     let threshold = 0;
     const dcsSummer = [];
     const dcsOther = [];
     const thresholdsSummer = [];
     const thresholdsOther = [];
-    let ec = menu.EC * parseFloat(state.kW);
+    let ec = menu.EC * parseFloat(kW);
 
     if (usage === 0) {
-      ec = menu.EC * parseFloat(state.kW) * 0.5;
+      ec = menu.EC * parseFloat(kW) * 0.5;
     }
 
     for (let dcStep = 1; dcStep <= Object.keys(menu.DC).length; dcStep += 1) {
@@ -121,19 +123,19 @@ const MainBottomChart = () => {
 
     for (let i = 0; i <= dcsSummer.length; i += 1) {
       if ([3, 4, 5].indexOf(month) === -1) { // その他季料金
-        if (thresholdsOther[i] == null || thresholdsOther[i] * state.kW > usage) {
-          dc += (usage - threshold * state.kW) * dcsOther[i];
+        if (thresholdsOther[i] == null || thresholdsOther[i] * kW > usage) {
+          dc += (usage - threshold * kW) * dcsOther[i];
           break;
         } else {
-          dc += (thresholdsOther[i] * state.kW - threshold * state.kW) * dcsOther[i];
+          dc += (thresholdsOther[i] * kW - threshold * kW) * dcsOther[i];
           threshold = thresholdsOther[i];
         }
       } else if ([3, 4, 5].indexOf(month) !== -1) { // 夏季料金
-        if (thresholdsSummer[i] == null || thresholdsSummer[i] * state.kW > usage) {
-          dc += (usage - threshold * state.kW) * dcsSummer[i];
+        if (thresholdsSummer[i] == null || thresholdsSummer[i] * kW > usage) {
+          dc += (usage - threshold * kW) * dcsSummer[i];
           break;
         } else {
-          dc += (thresholdsSummer[i] * state.kW - threshold * state.kW) * dcsSummer[i];
+          dc += (thresholdsSummer[i] * kW - threshold * kW) * dcsSummer[i];
           threshold = thresholdsSummer[i];
         }
       }
@@ -156,27 +158,27 @@ const MainBottomChart = () => {
     const nextCostTemp = [];
     let presentCostTotalTemp = 0;
     let nextCostTotalTemp = 0;
-    const chartUsages = demandCurveCalculator(presentMenu.contractType);
+    const chartUsages = demandCurveCalculator(presentMenu.contract_type);
 
     let month = 0;
     chartUsages.forEach((usage) => {
-      if (presentMenu.contractType === 1 || presentMenu.contractType === 2) {
+      if (presentMenu.contract_type === 1 || presentMenu.contract_type === 2) {
         presentCostTemp.push(costCalculator12(usage, presentMenu, presentCompany));
-      } else if (presentMenu.contractType === 3) {
+      } else if (presentMenu.contract_type === 3) {
         presentCostTemp.push(costCalculator3(usage, presentMenu, presentCompany, month));
       }
-      if (state.nextMenu.contractType === 1 || state.nextMenu.contractType === 2) {
+      if (state.nextMenu.contract_type === 1 || state.nextMenu.contract_type === 2) {
         nextCostTemp.push(costCalculator12(usage, state.nextMenu, state.nextCompany));
-      } else if (state.nextMenu.contractType === 3) {
+      } else if (state.nextMenu.contract_type === 3) {
         nextCostTemp.push(costCalculator3(usage, state.nextMenu, state.nextCompany, month));
       }
       presentCostTotalTemp += presentCostTemp[month];
       nextCostTotalTemp += nextCostTemp[month];
       month += 1;
     });
-
     setPresentCostTotal(presentCostTotalTemp);
     setNextCostTotal(nextCostTotalTemp);
+
     let energyChart;
     if (typeof (energyChart) !== 'undefined' && energyChart) {
       energyChart.destroy();
