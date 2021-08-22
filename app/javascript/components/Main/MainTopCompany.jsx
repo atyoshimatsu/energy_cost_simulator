@@ -40,7 +40,10 @@ const MainTopCompany = (props) => {
           }
         });
     }
-    $('html, body').animate({ scrollTop: $('#main_bottom').offset().top - 50 }, 400, 'swing');
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
     setState({ ...state, nextCompany: company, nextMenues: selectedNextMenues });
   };
 

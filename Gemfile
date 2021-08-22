@@ -67,7 +67,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'haml-rails'
 # csv import
 gem 'roo'
-# bining.pry
+# binding.pry
 gem 'pry-rails'
 # bootstrap
 gem 'bootstrap'

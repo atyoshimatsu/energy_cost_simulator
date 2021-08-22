@@ -34,7 +34,10 @@ const MainInfoUsage = () => {
   };
 
   const onClickToTop = () => {
-    $('html, body').animate({ scrollTop: $('#main_top').offset().top - 50 }, 400, 'swing');
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
   };
 
   let alertMessage = '';

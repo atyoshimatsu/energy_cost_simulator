@@ -8,21 +8,21 @@ const MainBottomMenu = () => {
     setState({ ...state, nextMenu: state.nextMenues[e.target.value] });
   };
 
-  let searchResult = [];
+  const searchResult = [];
   if (state.nextMenues.length !== 0) {
-    // for (const num in state.nextMenues) {
-    //   if (state.nextMenues[num].contract_type === state.menu.contract_type) {
-    //     searchResult.push(
-    //       <option value={num} key={state.nextMenues[num].id}>{state.nextMenues[num].name}</option>,
-    //     );
-    //   }
-    // }
-    searchResult = state.nextMenues.map((num) => {
+    for (const num in state.nextMenues) {
       if (state.nextMenues[num].contract_type === state.menu.contract_type) {
-        return (<option value={num} key={state.nextMenues[num].id}>{state.nextMenues[num].name}</option>);
+        searchResult.push(
+          <option value={num} key={state.nextMenues[num].id}>{state.nextMenues[num].name}</option>,
+        );
       }
-      return null;
-    }).filter(Boolean);
+    }
+    // searchResult = state.nextMenues.map((num) => {
+    //   if (state.nextMenues[num].contract_type === state.menu.contract_type) {
+    //     return (<option value={num} key={state.nextMenues[num].id}>{state.nextMenues[num].name}</option>);
+    //   }
+    //   return null;
+    // }).filter(Boolean);
   }
 
   return (

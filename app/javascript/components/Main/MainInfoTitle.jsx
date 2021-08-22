@@ -2,10 +2,16 @@ import React from 'react';
 
 const MainInfoTitle = () => {
   const onClickTo2 = () => {
-    $('html, body').animate({ scrollTop: $('#main_top').offset().top - 50 }, 400, 'swing');
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
   };
   const onClickTo3 = () => {
-    $('html, body').animate({ scrollTop: $('#main_bottom').offset().top - 50 }, 400, 'swing');
+    window.scrollBy({
+      top: window.innerHeight * 2,
+      behavior: 'smooth',
+    });
   };
 
   return (
