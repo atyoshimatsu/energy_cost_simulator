@@ -9,6 +9,6 @@ export const initState = {
   menues: [],
   areaCode: '',
   nextCompany: { name: '' },
-  nextMenues: {},
+  nextMenues: [],
   nextMenu: {},
 };
