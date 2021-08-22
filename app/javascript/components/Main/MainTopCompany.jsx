@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
+import propTypes from 'prop-types';
 import { StateContext } from '../context/context';
 
 const MainTopCompany = (props) => {
+  const { companies } = props;
   const [state, setState] = useContext(StateContext);
 
   const [inputKeyword, setInputKeyword] = useState('');
-  const [searchResultCompanies, setSearchResultCompanies] = useState(props.companies);
+  const [searchResultCompanies, setSearchResultCompanies] = useState(companies);
 
   const handleChange = (e) => {
     setInputKeyword(e.target.value);
@@ -18,7 +20,7 @@ const MainTopCompany = (props) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.length === 0 && inputKeyword.length === 0) {
-          setSearchResultCompanies(props.companies);
+          setSearchResultCompanies(companies);
         } else {
           setSearchResultCompanies(data);
         }
@@ -52,13 +54,13 @@ const MainTopCompany = (props) => {
     searchResultCompanies.forEach((company) => {
       serchResult.push(
         <div className="card" key={company.id}>
-          <img className="card-img-top" src={company.image} />
+          <img className="card-img-top" src={company.image} alt="会社ロゴ" />
           <div className="card-body p-2">
             <a className="card-title" data-company-id={company.id} href={company.url} target="_blank" rel="noreferrer">{company.name}</a>
             <div className="card-text">{company.text}</div>
             <div className="card-btn">
               <p />
-              <div className="btn btn-secondary main_top_process_btn_to_bottom" onClick={onClickToBottom.bind(this, company)}>この会社と比較</div>
+              <div className="btn btn-secondary main_top_process_btn_to_bottom" onClick={onClickToBottom.bind(this, company)} onKeyPress={onClickToBottom.bind(this, company)} role="button" tabIndex="0">この会社と比較</div>
               <p />
             </div>
           </div>
@@ -84,4 +86,16 @@ const MainTopCompany = (props) => {
   );
 };
 
+MainTopCompany.propTypes = {
+  companies: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.number,
+    name: propTypes.string,
+    image: propTypes.string,
+    text: propTypes.string,
+    title: propTypes.string,
+    url: propTypes.string,
+    created_at: propTypes.string,
+    updated_at: propTypes.string,
+  })).isRequired,
+};
 export default MainTopCompany;

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { StateContext } from '../context/context';
 
 const MainBottomCompany = () => {
+  // eslint-disable-next-line no-unused-vars
   const [state, setState] = useContext(StateContext);
   return (
     <>

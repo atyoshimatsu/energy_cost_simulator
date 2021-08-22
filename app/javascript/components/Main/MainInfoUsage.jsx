@@ -10,23 +10,23 @@ const MainInfoUsage = () => {
   const [alertFlag, setAlertFlag] = useState('');
 
   const handleChange = (e, key) => {
-    const usages_copy = stateUsages.slice();
-    const styles_copy = styles.slice();
+    const usagesCopy = stateUsages.slice();
+    const stylesCopy = styles.slice();
 
-    usages_copy[key] = e.target.value;
-    setStateUsages(usages_copy);
-    setState({ ...state, usages: usages_copy });
+    usagesCopy[key] = e.target.value;
+    setStateUsages(usagesCopy);
+    setState({ ...state, usages: usagesCopy });
 
-    if (!/^[0-9]*$/.test(usages_copy[key]) && usages_copy[key] != null && usages_copy[key] != '') {
-      styles_copy[key] = { background: 'lightcoral' };
+    if (!/^[0-9]*$/.test(usagesCopy[key]) && usagesCopy[key] != null && usagesCopy[key] !== '') {
+      stylesCopy[key] = { background: 'lightcoral' };
     } else {
-      styles_copy[key] = {};
+      stylesCopy[key] = {};
     }
-    setStyles(styles_copy);
+    setStyles(stylesCopy);
 
     setAlertFlag(0);
-    for (let i = 0; i < 12; i++) {
-      if (!/^[0-9]*$/.test(usages_copy[i]) && usages_copy[i] != null && usages_copy[i] != '') {
+    for (let i = 0; i < 12; i += 1) {
+      if (!/^[0-9]*$/.test(usagesCopy[i]) && usagesCopy[i] != null && usagesCopy[i] !== '') {
         setAlertFlag(alertFlag + 1);
         break;
       }
@@ -38,14 +38,14 @@ const MainInfoUsage = () => {
   };
 
   let alertMessage = '';
-  if (alertFlag != 0) {
+  if (alertFlag !== 0) {
     alertMessage = (<div className="main_info_usage-title_alert">半角整数で入力して下さい</div>);
   }
 
   let nullCheck = true;
   let button = '';
   stateUsages.forEach((usage) => {
-    if (usage != null && usage != '') {
+    if (usage != null && usage !== '') {
       nullCheck = false;
     }
   });
@@ -53,7 +53,7 @@ const MainInfoUsage = () => {
   if ((IsAmpereArea(state.areaCode) && state.company !== {} && state.menu !== {} && state.kW !== '' && state.areaCode !== '' && alertFlag === 0 && nullCheck === false)
   || (!IsAmpereArea(state.areaCode) && state.company !== {} && state.menu !== {} && state.areaCode !== '' && alertFlag === 0 && nullCheck === false)) {
     button = (
-      <div className="main_info_process_btn_to_top" onClick={onClickToTop} style={{ background: 'tomato' }}>次へ</div>
+      <div className="main_info_process_btn_to_top" onClick={onClickToTop} style={{ background: 'tomato' }} onKeyPress={onClickToTop} role="button" tabIndex="0">次へ</div>
     );
   } else {
     button = (

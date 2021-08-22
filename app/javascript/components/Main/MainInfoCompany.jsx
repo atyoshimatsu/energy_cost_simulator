@@ -18,7 +18,7 @@ const MainInfoCompany = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.length == 0 || inputKeyword == '') {
+        if (data.length === 0 || inputKeyword === '') {
           setIsFound(false);
         } else {
           setIsFound(true);
@@ -32,13 +32,13 @@ const MainInfoCompany = () => {
     setCompanies([]);
     setState({ ...state, company: selectedCompany });
 
-    if (selectedCompany.id != '' && state.areaCode != '') {
+    if (selectedCompany.id !== '' && state.areaCode !== '') {
       await fetch(`/api/menu_search/menues?company_code=${selectedCompany.id}&area_code=${state.areaCode}`, {
         method: 'GET',
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.length != 0) {
+          if (data.length !== 0) {
             setState({ ...state, menues: data });
           }
         });
@@ -52,7 +52,7 @@ const MainInfoCompany = () => {
       searchResult.push(
         <div className="main_info_company-search_result" key={company.id}>
           <div className="main_info_company-search_result-list">{company.name}</div>
-          <div className="main_info_company-search_result-button" data-company-id={company.id} data-company-name={company.name} onClick={onClickSetCompany.bind(this, company)}>選択する</div>
+          <div className="main_info_company-search_result-button" data-company-id={company.id} data-company-name={company.name} onClick={onClickSetCompany.bind(this, company)} onKeyPress={onClickSetCompany.bind(this, company)} role="button" tabIndex="0">選択する</div>
         </div>,
       );
     });

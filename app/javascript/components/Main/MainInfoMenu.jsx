@@ -10,12 +10,12 @@ const MainInfoMenu = () => {
 
   const searchResult = [];
   let i = 0;
-  if (state.menues.length != 0) {
+  if (state.menues.length !== 0) {
     state.menues.forEach((menu) => {
       searchResult.push(
         <option value={i} key={menu.id}>{menu.name}</option>,
       );
-      i++;
+      i += 1;
     });
   }
 
