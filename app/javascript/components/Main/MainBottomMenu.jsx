@@ -1,22 +1,21 @@
-import React, { useContext } from "react"
-import { StateContext } from "../context/context";
+import React, { useContext } from 'react';
+import { StateContext } from '../context/context';
 
 const MainBottomMenu = () => {
   const [state, setState] = useContext(StateContext);
 
   const handleChange = (e) => {
-    setState({...state, nextMenu: state.nextMenues[e.target.value]});
-  }
+    setState({ ...state, nextMenu: state.nextMenues[e.target.value] });
+  };
 
   let searchResult = [];
-  if (state.nextMenues.length != 0) {
-    for (let num in state.nextMenues) {
-      if (state.nextMenues[num].contract_type === state.menu.contract_type) {
-        searchResult.push(
-          <option value={num} key={state.nextMenues[num].id}>{state.nextMenues[num].name}</option>
-        )
+  if (state.nextMenues.length !== 0) {
+    searchResult = state.nextMenues.map((nextMenu, index) => {
+      if (nextMenu.contract_type === state.menu.contract_type) {
+        return (<option value={index} key={nextMenu.id}>{nextMenu.name}</option>);
       }
-    }
+      return null;
+    }).filter(Boolean);
   }
 
   return (
@@ -32,7 +31,6 @@ const MainBottomMenu = () => {
       </div>
     </>
   );
+};
 
-}
-
-export default MainBottomMenu
+export default MainBottomMenu;
