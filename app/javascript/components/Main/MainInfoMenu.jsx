@@ -13,7 +13,9 @@ const MainInfoMenu = () => {
   if (state.menues.length !== 0) {
     state.menues.forEach((menu) => {
       searchResult.push(
-        <option value={i} key={menu.id}>{menu.name}</option>,
+        <option value={i} key={menu.id}>
+          {menu.name}
+        </option>
       );
       i += 1;
     });

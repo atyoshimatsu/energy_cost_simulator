@@ -50,24 +50,32 @@ const MainTopCompany = (props) => {
   const serchResult = [];
   let alertMessage = '';
   if (searchResultCompanies.length === 0) {
-    alertMessage = (
-      <div className="main_top_company-title_alert"> 電力会社がみつかりません</div>
-    );
+    alertMessage = <div className="main_top_company-title_alert"> 電力会社がみつかりません</div>;
   } else {
     searchResultCompanies.forEach((company) => {
       serchResult.push(
         <div className="card" key={company.id}>
           <img className="card-img-top" src={company.image} alt="会社ロゴ" />
           <div className="card-body p-2">
-            <a className="card-title" data-company-id={company.id} href={company.url} target="_blank" rel="noreferrer">{company.name}</a>
+            <a className="card-title" data-company-id={company.id} href={company.url} target="_blank" rel="noreferrer">
+              {company.name}
+            </a>
             <div className="card-text">{company.text}</div>
             <div className="card-btn">
               <p />
-              <div className="btn btn-secondary main_top_process_btn_to_bottom" onClick={onClickToBottom.bind(this, company)} onKeyPress={onClickToBottom.bind(this, company)} role="button" tabIndex="0">この会社と比較</div>
+              <div
+                className="btn btn-secondary main_top_process_btn_to_bottom"
+                onClick={onClickToBottom.bind(this, company)}
+                onKeyPress={onClickToBottom.bind(this, company)}
+                role="button"
+                tabIndex="0"
+              >
+                この会社と比較
+              </div>
               <p />
             </div>
           </div>
-        </div>,
+        </div>
       );
     });
   }
@@ -78,27 +86,33 @@ const MainTopCompany = (props) => {
         {alertMessage}
       </div>
       <div className="main_top_company-search">
-        <input className="main_top_company-search_form" onChange={handleChange} onKeyUp={onKeyUpCompany} placeholder=" ex. 東京電力エナジーパートナー" type="text" />
+        <input
+          className="main_top_company-search_form"
+          onChange={handleChange}
+          onKeyUp={onKeyUpCompany}
+          placeholder=" ex. 東京電力エナジーパートナー"
+          type="text"
+        />
       </div>
       <div className="main_top_company-search_result">
-        <div className="card-columns">
-          {serchResult}
-        </div>
+        <div className="card-columns">{serchResult}</div>
       </div>
     </>
   );
 };
 
 MainTopCompany.propTypes = {
-  companies: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.number,
-    name: propTypes.string,
-    image: propTypes.string,
-    text: propTypes.string,
-    title: propTypes.string,
-    url: propTypes.string,
-    created_at: propTypes.string,
-    updated_at: propTypes.string,
-  })).isRequired,
+  companies: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number,
+      name: propTypes.string,
+      image: propTypes.string,
+      text: propTypes.string,
+      title: propTypes.string,
+      url: propTypes.string,
+      created_at: propTypes.string,
+      updated_at: propTypes.string,
+    })
+  ).isRequired,
 };
 export default MainTopCompany;

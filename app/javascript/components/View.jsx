@@ -37,16 +37,18 @@ View.propTypes = {
     created_at: propTypes.string,
     updated_at: propTypes.string,
   }).isRequired,
-  companies: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.number,
-    name: propTypes.string,
-    image: propTypes.string,
-    text: propTypes.string,
-    title: propTypes.string,
-    url: propTypes.string,
-    created_at: propTypes.string,
-    updated_at: propTypes.string,
-  })).isRequired,
+  companies: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number,
+      name: propTypes.string,
+      image: propTypes.string,
+      text: propTypes.string,
+      title: propTypes.string,
+      url: propTypes.string,
+      created_at: propTypes.string,
+      updated_at: propTypes.string,
+    })
+  ).isRequired,
 };
 
 export default View;

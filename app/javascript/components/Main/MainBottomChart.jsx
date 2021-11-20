@@ -51,7 +51,8 @@ const MainBottomChart = () => {
         ec = menu.EC * parseFloat(kW) * 0.5;
       }
 
-      if (company.id === 17 && menu.area === 6) { // みんな電力 最低料金制の従量電灯B
+      if (company.id === 17 && menu.area === 6) {
+        // みんな電力 最低料金制の従量電灯B
         ec = 55 * (kW - 6) + 165;
       } else if (company.id === 17 && menu.area === 7) {
         ec = 33 * (kW - 6) + 104.5;
@@ -72,7 +73,8 @@ const MainBottomChart = () => {
       // 最低料金制
       ec = menu.EC;
 
-      if (menu.area === '8' && company.id !== 17) { // 関西・中国の最低料金は15kWh〜、四国の最低料金は11kWh〜
+      if (menu.area === '8' && company.id !== 17) {
+        // 関西・中国の最低料金は15kWh〜、四国の最低料金は11kWh〜
         threshold = 11;
       } else {
         threshold = 15;
@@ -122,7 +124,8 @@ const MainBottomChart = () => {
     }
 
     for (let i = 0; i <= dcsSummer.length; i += 1) {
-      if ([3, 4, 5].indexOf(month) === -1) { // その他季料金
+      if ([3, 4, 5].indexOf(month) === -1) {
+        // その他季料金
         if (thresholdsOther[i] == null || thresholdsOther[i] * kW > usage) {
           dc += (usage - threshold * kW) * dcsOther[i];
           break;
@@ -130,7 +133,8 @@ const MainBottomChart = () => {
           dc += (thresholdsOther[i] * kW - threshold * kW) * dcsOther[i];
           threshold = thresholdsOther[i];
         }
-      } else if ([3, 4, 5].indexOf(month) !== -1) { // 夏季料金
+      } else if ([3, 4, 5].indexOf(month) !== -1) {
+        // 夏季料金
         if (thresholdsSummer[i] == null || thresholdsSummer[i] * kW > usage) {
           dc += (usage - threshold * kW) * dcsSummer[i];
           break;
@@ -180,7 +184,7 @@ const MainBottomChart = () => {
     setNextCostTotal(nextCostTotalTemp);
 
     let energyChart;
-    if (typeof (energyChart) !== 'undefined' && energyChart) {
+    if (typeof energyChart !== 'undefined' && energyChart) {
       energyChart.destroy();
     }
 
@@ -201,13 +205,15 @@ const MainBottomChart = () => {
             data: presentCostTemp,
             backgroundColor: 'rgba(219,39,91,0.5)',
             yAxisID: 'yAxes1',
-          }, {
+          },
+          {
             type: 'bar',
             label: '切替後の電気料金',
             data: nextCostTemp,
             backgroundColor: 'rgba(130,201,169,0.5)',
             yAxisID: 'yAxes1',
-          }, {
+          },
+          {
             type: 'line',
             label: '電気使用量（kWh）',
             data: chartUsages,
@@ -224,33 +230,34 @@ const MainBottomChart = () => {
           text: '電気料金シミュレーション',
         },
         scales: {
-          yAxes: [{
-            id: 'yAxes1',
-            type: 'linear',
-            position: 'left',
-            ticks: {
-              suggestedMax:
-                getMaxScale(Math.max.apply(null, presentCostTemp.concat(nextCostTemp))),
-              suggestedMin: 0,
-              stepSize:
-                getMaxScale(Math.max.apply(null, presentCostTemp.concat(nextCostTemp))) / 10,
-              callback(value) {
-                return `${value}円`;
+          yAxes: [
+            {
+              id: 'yAxes1',
+              type: 'linear',
+              position: 'left',
+              ticks: {
+                suggestedMax: getMaxScale(Math.max.apply(null, presentCostTemp.concat(nextCostTemp))),
+                suggestedMin: 0,
+                stepSize: getMaxScale(Math.max.apply(null, presentCostTemp.concat(nextCostTemp))) / 10,
+                callback(value) {
+                  return `${value}円`;
+                },
               },
             },
-          }, {
-            id: 'yAxes2',
-            type: 'linear',
-            position: 'right',
-            ticks: {
-              suggestedMax: getMaxScale(Math.max.apply(null, chartUsages)),
-              suggestedMin: 0,
-              stepSize: getMaxScale(Math.max.apply(null, chartUsages)) / 10,
-              callback(value) {
-                return `${value}kWh`;
+            {
+              id: 'yAxes2',
+              type: 'linear',
+              position: 'right',
+              ticks: {
+                suggestedMax: getMaxScale(Math.max.apply(null, chartUsages)),
+                suggestedMin: 0,
+                stepSize: getMaxScale(Math.max.apply(null, chartUsages)) / 10,
+                callback(value) {
+                  return `${value}kWh`;
+                },
               },
             },
-          }],
+          ],
         },
       },
     });
@@ -258,9 +265,23 @@ const MainBottomChart = () => {
 
   let button = [];
   if (Object.values(state.nextMenu).length !== 0 && Object.values(state.nextCompany).length !== 0) {
-    button = (<div className="main_bottom_btn_calc" onClick={onClickDrawChart.bind(this)} onKeyPress={onClickDrawChart.bind(this)} role="button" tabIndex="0">電気料金を計算する！</div>);
+    button = (
+      <div
+        className="main_bottom_btn_calc"
+        onClick={onClickDrawChart.bind(this)}
+        onKeyPress={onClickDrawChart.bind(this)}
+        role="button"
+        tabIndex="0"
+      >
+        電気料金を計算する！
+      </div>
+    );
   } else {
-    button = (<div className="main_bottom_btn_calc" style={{ background: 'darkgray', cursor: 'default' }}>電気料金を計算する！</div>);
+    button = (
+      <div className="main_bottom_btn_calc" style={{ background: 'darkgray', cursor: 'default' }}>
+        電気料金を計算する！
+      </div>
+    );
   }
 
   let result = nextCostTotal - presentCostTotal;
@@ -271,10 +292,7 @@ const MainBottomChart = () => {
       <div className="main_bottom_result">
         <div>
           年間で
-          <strong style={{ color: 'red' }}>
-            {result}
-            円
-          </strong>
+          <strong style={{ color: 'red' }}>{result}円</strong>
           お得になります！
         </div>
       </div>
@@ -284,10 +302,7 @@ const MainBottomChart = () => {
       <div className="main_bottom_result">
         <div>
           年間で
-          <strong style={{ color: 'steelblue' }}>
-            {result}
-            円
-          </strong>
+          <strong style={{ color: 'steelblue' }}>{result}円</strong>
           の費用増になります
         </div>
       </div>
