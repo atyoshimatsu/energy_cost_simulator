@@ -19,5 +19,6 @@ module.exports = {
   ],
   rules: {
     'max-len': ['error', { code: 300 }],
+    'react/jsx-one-expression-per-line': ['enabled', { allow: "single-child" }]
   },
 };

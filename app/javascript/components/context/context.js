@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const StateContext = React.createContext();
+export const stateContext = React.createContext();
 export const initState = {
   company: {},
   menu: {},

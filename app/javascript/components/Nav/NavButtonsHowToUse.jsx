@@ -12,7 +12,9 @@ const NavButtonsHowToUse = () => {
   };
 
   return (
-    <div className="nav_buttons_config_howtouse" onClick={onClick()} onKeyPress={onClick()} role="button" tabIndex="0">使い方</div>
+    <div className="nav_buttons_config_howtouse" onClick={onClick()} onKeyPress={onClick()} role="button" tabIndex="0">
+      使い方
+    </div>
   );
 };
 

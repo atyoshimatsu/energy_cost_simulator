@@ -52,14 +52,22 @@ const MainInfoCompany = () => {
       searchResult.push(
         <div className="main_info_company-search_result" key={company.id}>
           <div className="main_info_company-search_result-list">{company.name}</div>
-          <div className="main_info_company-search_result-button" data-company-id={company.id} data-company-name={company.name} onClick={onClickSetCompany.bind(this, company)} onKeyPress={onClickSetCompany.bind(this, company)} role="button" tabIndex="0">選択する</div>
-        </div>,
+          <div
+            className="main_info_company-search_result-button"
+            data-company-id={company.id}
+            data-company-name={company.name}
+            onClick={onClickSetCompany.bind(this, company)}
+            onKeyPress={onClickSetCompany.bind(this, company)}
+            role="button"
+            tabIndex="0"
+          >
+            選択する
+          </div>
+        </div>
       );
     });
   } else {
-    alertMessage = (
-      <div className="main_info_company-title_alert"> 電力会社がみつかりません</div>
-    );
+    alertMessage = <div className="main_info_company-title_alert"> 電力会社がみつかりません</div>;
   }
 
   return (
@@ -69,7 +77,16 @@ const MainInfoCompany = () => {
         {alertMessage}
       </div>
       <div className="main_info_company-search">
-        <input className="main_info_company-search_form" value={inputKeyword} onChange={handleChange} onKeyUp={onKeyUpCompany} placeholder=" ex. 東京電力エナジーパートナー" type="text" name="name" id="name" />
+        <input
+          className="main_info_company-search_form"
+          value={inputKeyword}
+          onChange={handleChange}
+          onKeyUp={onKeyUpCompany}
+          placeholder=" ex. 東京電力エナジーパートナー"
+          type="text"
+          name="name"
+          id="name"
+        />
       </div>
       {searchResult}
     </>

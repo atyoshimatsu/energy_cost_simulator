@@ -11,14 +11,22 @@ const MainInfoContract = () => {
 
   const contractInput = [];
   if (state.menu.contract_type === 1 && IsAmpereArea(state.areaCode)) {
-    contractInput.push(<option value="1" key="1">10A</option>);
-    contractInput.push(<option value="1.5" key="1.5">15A</option>);
+    contractInput.push(
+      <option value="1" key="1">
+        10A
+      </option>
+    );
+    contractInput.push(
+      <option value="1.5" key="1.5">
+        15A
+      </option>
+    );
     for (let i = 2; i <= 6; i += 1) {
       contractInput.push(
         <option value={i} key={i}>
           {i}
           0A
-        </option>,
+        </option>
       );
     }
   } else if (state.menu.contract_type === 2) {
@@ -27,19 +35,21 @@ const MainInfoContract = () => {
         <option value={i} key={i}>
           {i}
           kVA
-        </option>,
+        </option>
       );
     }
   } else if (state.menu.contract_type === 3) {
     contractInput.push(
-      <option value="0.5" key="0.5">0.5kW</option>,
+      <option value="0.5" key="0.5">
+        0.5kW
+      </option>
     );
     for (let i = 1; i <= 49; i += 1) {
       contractInput.push(
         <option value={i} key={i}>
           {i}
           kW
-        </option>,
+        </option>
       );
     }
   }

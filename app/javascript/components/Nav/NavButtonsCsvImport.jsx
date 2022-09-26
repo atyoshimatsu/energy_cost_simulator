@@ -5,12 +5,17 @@ const NavButtonsCsvImport = ({ administrator }) => {
   let button = [];
   if (administrator === true) {
     button = (
-      <div className="nav_buttons_config_csv-import" data-target="#importModal" data-toggle="modal" data-backdrop="true">config</div>
+      <div
+        className="nav_buttons_config_csv-import"
+        data-target="#importModal"
+        data-toggle="modal"
+        data-backdrop="true"
+      >
+        config
+      </div>
     );
   }
-  return (
-    <div>{button}</div>
-  );
+  return <div>{button}</div>;
 };
 
 NavButtonsCsvImport.propTypes = {

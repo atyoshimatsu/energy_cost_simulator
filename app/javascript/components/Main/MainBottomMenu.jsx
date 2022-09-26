@@ -10,12 +10,18 @@ const MainBottomMenu = () => {
 
   let searchResult = [];
   if (state.nextMenues.length !== 0) {
-    searchResult = state.nextMenues.map((nextMenu, index) => {
-      if (nextMenu.contract_type === state.menu.contract_type) {
-        return (<option value={index} key={nextMenu.id}>{nextMenu.name}</option>);
-      }
-      return null;
-    }).filter(Boolean);
+    searchResult = state.nextMenues
+      .map((nextMenu, index) => {
+        if (nextMenu.contract_type === state.menu.contract_type) {
+          return (
+            <option value={index} key={nextMenu.id}>
+              {nextMenu.name}
+            </option>
+          );
+        }
+        return null;
+      })
+      .filter(Boolean);
   }
 
   return (
