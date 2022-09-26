@@ -1,7 +1,7 @@
-# README
+# What this is
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Electricity energy cost simulator built in Ruby on Rails and React.
+Sorry for specializing in Japanese electricity contracts.
 
 Things you may want to cover:
 
