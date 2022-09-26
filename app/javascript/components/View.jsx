@@ -5,7 +5,7 @@ import MainInfo from './Main/MainInfo';
 import MainTop from './Main/MainTop';
 import MainBottom from './Main/MainBottom';
 import Sidebar from './Sidebar';
-import { StateContext, initState } from './context/context';
+import { stateContext, initState } from './context/context';
 
 const View = ({ user, companies }) => {
   const [state, setState] = useState(initState);
@@ -15,11 +15,11 @@ const View = ({ user, companies }) => {
         <Nav user={user} />
         <div className="wrapper">
           <div className="main">
-            <StateContext.Provider value={[state, setState]}>
+            <stateContext.Provider value={[state, setState]}>
               <MainInfo />
               <MainTop companies={companies} />
               <MainBottom />
-            </StateContext.Provider>
+            </stateContext.Provider>
           </div>
           <Sidebar />
         </div>
