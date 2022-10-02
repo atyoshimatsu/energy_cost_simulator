@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 
 const MainInfoArea = () => {
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
 
   const handleChange = async (e) => {
     e.persist();

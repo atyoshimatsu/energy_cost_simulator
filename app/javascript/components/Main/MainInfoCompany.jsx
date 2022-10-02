@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 
 const MainInfoCompany = () => {
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
 
   const [isFound, setIsFound] = useState(true);
   const [companies, setCompanies] = useState([]);

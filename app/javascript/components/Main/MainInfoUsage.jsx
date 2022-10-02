@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 import { IsAmpereArea } from '../consts';
 
 const MainInfoUsage = () => {
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
 
   const [stateUsages, setStateUsages] = useState(state.usages);
   const [styles, setStyles] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);

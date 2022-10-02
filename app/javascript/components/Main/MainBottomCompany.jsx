@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 
 const MainBottomCompany = () => {
   // eslint-disable-next-line no-unused-vars
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
   return (
     <>
       <div className="main_bottom_company">比較する電力会社</div>

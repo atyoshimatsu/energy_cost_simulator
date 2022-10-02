@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { IsAmpereArea } from '../consts';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 
 const MainInfoContract = () => {
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
 
   const handleChange = (e) => {
     setState({ ...state, kW: e.target.value });

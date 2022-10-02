@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 
 const MainInfoMenu = () => {
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
 
   const handleChange = (e) => {
     setState({ ...state, menu: state.menues[e.target.value] });

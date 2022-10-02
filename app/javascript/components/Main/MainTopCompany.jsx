@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import propTypes from 'prop-types';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 
 const MainTopCompany = (props) => {
   const { companies } = props;
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
 
   const [inputKeyword, setInputKeyword] = useState('');
   const [searchResultCompanies, setSearchResultCompanies] = useState(companies);

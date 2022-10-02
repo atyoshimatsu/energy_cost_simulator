@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import $ from 'jquery';
 import Chart from 'chart.js';
 import { demandCurves, IsAmpereArea } from '../consts';
-import { StateContext } from '../context/context';
+import { stateContext } from '../context/context';
 
 const MainBottomChart = () => {
   // eslint-disable-next-line no-unused-vars
-  const [state, setState] = useContext(StateContext);
+  const [state, setState] = useContext(stateContext);
 
   const [presentCostTotal, setPresentCostTotal] = useState(0);
   const [nextCostTotal, setNextCostTotal] = useState(0);
