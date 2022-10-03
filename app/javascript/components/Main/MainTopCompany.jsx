@@ -62,7 +62,6 @@ const MainTopCompany = (props) => {
             </a>
             <div className="card-text">{company.text}</div>
             <div className="card-btn">
-              <p />
               <div
                 className="btn btn-secondary main_top_process_btn_to_bottom"
                 onClick={onClickToBottom.bind(this, company)}
@@ -72,7 +71,6 @@ const MainTopCompany = (props) => {
               >
                 この会社と比較
               </div>
-              <p />
             </div>
           </div>
         </div>
